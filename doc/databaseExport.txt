@@ -1,0 +1,50 @@
+table company{
+  id int [pk, increment]
+  name varchar(120)
+  address int
+  contact int
+}
+
+table contact{
+  id int [pk, increment]
+  email varchar(120)
+  phone varchar(20)
+  fax varchar(20)
+}
+
+table address{
+id int [pk, increment]
+  streetName varchar(120)
+  streetNumber int
+  postalCode varchar(20)
+  city varchar(120)
+  state varchar(120)
+}
+
+table product{
+  id int [pk, increment]
+  name varchar(120)
+  description text
+}
+
+table stockItem{
+  id int [pk, increment]
+  suplier_id int
+  product_id int
+  quantity int
+  price int
+}
+
+table expedition{
+  id int [pk, increment]
+  customer_id int
+  stockItem_id int
+  status varchar(50)
+}
+
+Ref: expedition.stockItem_id > stockItem.id
+Ref: expedition.customer_id > company.id
+Ref: contact.id < company.contact
+Ref: address.id < company.address
+Ref: stockItem.product_id > product.id
+Ref: stockItem.suplier_id > company.id
