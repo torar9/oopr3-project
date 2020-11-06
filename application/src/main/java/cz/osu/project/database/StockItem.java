@@ -28,4 +28,70 @@ public class StockItem {
     @ManyToOne
     @JoinColumn(name="company", nullable=false)
     private Company company;
+
+    public StockItem(int id, int quantity, Double price, LocalDateTime storageDate, Product product, Expedition expedition, Company company) {
+        this.id = id;
+        this.quantity = quantity;
+        this.price = price;
+        this.storageDate = storageDate;
+        this.product = product;
+        this.expedition = expedition;
+        this.company = company;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public LocalDateTime getStorageDate() {
+        return storageDate;
+    }
+
+    public void setStorageDate(LocalDateTime storageDate) {
+        this.storageDate = storageDate;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Expedition getExpedition() {
+        return expedition;
+    }
+
+    public void setExpedition(Expedition expedition) {
+        this.expedition = expedition;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 }

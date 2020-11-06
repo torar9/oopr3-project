@@ -17,4 +17,43 @@ public class Product {
 
     @OneToMany(mappedBy="product")
     private Set<StockItem> stockItems;
+
+    public Product(int id, String name, String description, Set<StockItem> stockItems) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.stockItems = stockItems;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<StockItem> getStockItems() {
+        return stockItems;
+    }
+
+    public void setStockItems(Set<StockItem> stockItems) {
+        this.stockItems = stockItems;
+    }
 }

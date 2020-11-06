@@ -26,4 +26,51 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private Set<Expedition> expeditions;
 
+    public Company(int id, String name, Address address, Contact contact, Set<Expedition> expeditions) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.expeditions = expeditions;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public Set<Expedition> getExpeditions() {
+        return expeditions;
+    }
+
+    public void setExpeditions(Set<Expedition> expeditions) {
+        this.expeditions = expeditions;
+    }
 }
