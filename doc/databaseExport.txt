@@ -1,8 +1,8 @@
 table company{
   id int [pk, increment]
   name varchar(120)
-  address int
-  contact int
+  address_id int
+  contact_id int
 }
 
 table contact{
@@ -15,7 +15,7 @@ table contact{
 table address{
 id int [pk, increment]
   streetName varchar(120)
-  streetNumber int
+  buildingNumber int
   postalCode varchar(20)
   city varchar(120)
   state varchar(120)
@@ -29,10 +29,12 @@ table product{
 
 table stockItem{
   id int [pk, increment]
+  expedition_id int
   suplier_id int
   product_id int
   quantity int
   price int
+  storageDate timestamp
 }
 
 table expedition{
@@ -40,11 +42,12 @@ table expedition{
   customer_id int
   stockItem_id int
   status varchar(50)
+  createDate datetime
 }
 
-Ref: expedition.stockItem_id > stockItem.id
+Ref: expedition.id < stockItem.expedition_id
 Ref: expedition.customer_id > company.id
-Ref: contact.id < company.contact
-Ref: address.id < company.address
+Ref: contact.id < company.contact_id
+Ref: address.id < company.address_id
 Ref: stockItem.product_id > product.id
 Ref: stockItem.suplier_id > company.id

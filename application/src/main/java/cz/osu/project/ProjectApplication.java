@@ -1,4 +1,4 @@
-package cz.osu.project;
+package cz.osu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
