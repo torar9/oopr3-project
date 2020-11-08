@@ -1,6 +1,8 @@
 package cz.osu.project.database;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface StockItemRepository extends CrudRepository<StockItem, Integer> {
+@Repository
+public interface StockItemRepository extends JpaRepository<StockItem, Long> {
 }

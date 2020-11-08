@@ -1,6 +1,10 @@
 package cz.osu.project.database;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ContactRepository extends CrudRepository<Contact, Integer> {
+@Repository
+@ComponentScan({"cz.osu.project.service"})
+public interface ContactRepository extends JpaRepository<Contact, Long> {
 }

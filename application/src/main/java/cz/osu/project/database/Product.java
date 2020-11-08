@@ -1,8 +1,6 @@
 package cz.osu.project.database;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Product")
@@ -11,25 +9,36 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
     private String name;
     private String description;
 
     @OneToMany(mappedBy="product")
     private Set<StockItem> stockItems;
 
-    public Product(int id, String name, String description, Set<StockItem> stockItems) {
+    public Product(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Product(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    public Product(long id, String name, String description, Set<StockItem> stockItems) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.stockItems = stockItems;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

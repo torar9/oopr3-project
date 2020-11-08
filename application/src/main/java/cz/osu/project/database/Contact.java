@@ -1,11 +1,6 @@
 package cz.osu.project.database;
 
-import org.hibernate.mapping.Join;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 @Entity(name = "Contact")
 @Table(name = "contact")
@@ -13,7 +8,7 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
     private String email;
     private String phone;
     private String fax;
@@ -21,7 +16,7 @@ public class Contact {
     @OneToOne(mappedBy = "contact")
     private Company company;
 
-    public Contact(int id, String email, String phone, String fax, Company company) {
+    public Contact(long id, String email, String phone, String fax, Company company) {
         this.id = id;
         this.email = email;
         this.phone = phone;
@@ -29,11 +24,11 @@ public class Contact {
         this.company = company;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

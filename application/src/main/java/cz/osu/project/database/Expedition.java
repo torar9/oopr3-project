@@ -4,8 +4,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Expedition")
@@ -14,7 +12,7 @@ public class Expedition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
     private String status;
     @CreationTimestamp
     private LocalDateTime createDate;
@@ -26,7 +24,7 @@ public class Expedition {
     @JoinColumn(name="company", nullable=false)
     private Company company;
 
-    public Expedition(int id, String status, LocalDateTime createDate, Set<StockItem> stockItems, Company company) {
+    public Expedition(long id, String status, LocalDateTime createDate, Set<StockItem> stockItems, Company company) {
         this.id = id;
         this.status = status;
         this.createDate = createDate;
@@ -34,11 +32,11 @@ public class Expedition {
         this.company = company;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

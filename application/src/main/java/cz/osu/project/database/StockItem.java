@@ -11,7 +11,7 @@ public class StockItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
     private int quantity;
     private Double price;
     @CreationTimestamp
@@ -29,7 +29,7 @@ public class StockItem {
     @JoinColumn(name="company", nullable=false)
     private Company company;
 
-    public StockItem(int id, int quantity, Double price, LocalDateTime storageDate, Product product, Expedition expedition, Company company) {
+    public StockItem(long id, int quantity, Double price, LocalDateTime storageDate, Product product, Expedition expedition, Company company) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
@@ -39,11 +39,11 @@ public class StockItem {
         this.company = company;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

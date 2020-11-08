@@ -1,8 +1,6 @@
 package cz.osu.project.database;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "Address")
 @Table(name = "address")
@@ -10,7 +8,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
     private String streetName;
     private String buildingNumber;
     private String postalCode;
@@ -20,7 +18,7 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Company company;
 
-    public Address(int id, String streetName, String buildingNumber, String postalCode, String city, String state, Company company) {
+    public Address(long id, String streetName, String buildingNumber, String postalCode, String city, String state, Company company) {
         this.id = id;
         this.streetName = streetName;
         this.buildingNumber = buildingNumber;
@@ -30,11 +28,11 @@ public class Address {
         this.company = company;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

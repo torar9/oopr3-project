@@ -1,8 +1,6 @@
 package cz.osu.project.database;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Company")
@@ -11,7 +9,7 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
 
     private String name;
 
@@ -34,11 +32,11 @@ public class Company {
         this.expeditions = expeditions;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
