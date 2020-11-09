@@ -1,5 +1,6 @@
 package cz.osu.project.service;
 
+import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.database.repository.ExpeditionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,17 @@ public class ExpeditionService {
     CompanyService companyService;
     @Autowired
     StockItemService stockItemService;
-/*
-    public void create(long companyID, long stockItemID, String status) {
+
+    public void create(long companyID, String status) {
         if (status == null)
             throw new NullPointerException();
 
         Company company = companyService.get(companyID);
-        StockItem item = stockItemService.get(stockItemID);
 
-        Expedition expedition = new Expedition(status, company, item);
+        Expedition expedition = new Expedition(status, company);
 
         expoRepo.save(expedition);
-    }*/
+    }
 
     public Expedition get(long id) {
         return expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
