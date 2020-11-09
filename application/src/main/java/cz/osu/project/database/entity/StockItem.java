@@ -29,6 +29,13 @@ public class StockItem {
     @JoinColumn(name="company", nullable=false)
     private Company company;
 
+    public StockItem(int quantity, Double price, Product product, Company company) {
+        this.quantity = quantity;
+        this.price = price;
+        this.product = product;
+        this.company = company;
+    }
+
     public StockItem(long id, int quantity, Double price, LocalDateTime storageDate, Product product, Expedition expedition, Company company) {
         this.id = id;
         this.quantity = quantity;

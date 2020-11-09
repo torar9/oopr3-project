@@ -24,6 +24,12 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private Set<Expedition> expeditions;
 
+    public Company(String name, Address address, Contact contact) {
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+    }
+
     public Company(int id, String name, Address address, Contact contact, Set<Expedition> expeditions) {
         this.id = id;
         this.name = name;

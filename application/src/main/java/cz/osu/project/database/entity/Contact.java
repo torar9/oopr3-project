@@ -1,5 +1,7 @@
 package cz.osu.project.database;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 
 @Entity(name = "Contact")
@@ -22,6 +24,12 @@ public class Contact {
         this.phone = phone;
         this.fax = fax;
         this.company = company;
+    }
+
+    public Contact(String email, String phone, String fax) {
+        this.email = email;
+        this.phone = phone;
+        this.fax = fax;
     }
 
     public long getId() {

@@ -18,6 +18,14 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Company company;
 
+    public Address(String streetName, String buildingNumber, String postalCode, String city, String state) {
+        this.streetName = streetName;
+        this.buildingNumber = buildingNumber;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.state = state;
+    }
+
     public Address(long id, String streetName, String buildingNumber, String postalCode, String city, String state, Company company) {
         this.id = id;
         this.streetName = streetName;

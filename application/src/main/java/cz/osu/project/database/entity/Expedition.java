@@ -24,6 +24,12 @@ public class Expedition {
     @JoinColumn(name="company", nullable=false)
     private Company company;
 
+    public Expedition(String status, Set<StockItem> stockItems, Company company) {
+        this.status = status;
+        this.stockItems = stockItems;
+        this.company = company;
+    }
+
     public Expedition(long id, String status, LocalDateTime createDate, Set<StockItem> stockItems, Company company) {
         this.id = id;
         this.status = status;
