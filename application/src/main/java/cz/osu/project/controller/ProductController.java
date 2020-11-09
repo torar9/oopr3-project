@@ -1,5 +1,7 @@
 package cz.osu.project.controller;
 
+import cz.osu.project.service.AddressService;
+import cz.osu.project.service.ContactService;
 import cz.osu.project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,10 +14,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProductController {
     @Autowired
     ProductService productService;
+    @Autowired
+    ContactService contactService;
+    @Autowired
+    AddressService addressServiceService;
 
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        productService.create("test", "lol");
+        model.addAttribute("name", name);
+        return "greeting";
+    }
+
+    @GetMapping("/newItem")
+    public String newItem(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
 
         model.addAttribute("name", name);
         return "greeting";

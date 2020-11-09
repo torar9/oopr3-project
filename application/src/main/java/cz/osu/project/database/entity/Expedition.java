@@ -1,4 +1,4 @@
-package cz.osu.project.database;
+package cz.osu.project.database.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 

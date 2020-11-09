@@ -1,4 +1,4 @@
-package cz.osu.project.database;
+package cz.osu.project.database.entity;
 
 import javax.persistence.*;
 

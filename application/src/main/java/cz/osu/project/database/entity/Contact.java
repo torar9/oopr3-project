@@ -1,6 +1,4 @@
-package cz.osu.project.database;
-
-import org.springframework.lang.Nullable;
+package cz.osu.project.database.entity;
 
 import javax.persistence.*;
 
