@@ -1,6 +1,5 @@
 package cz.osu.project.service;
 
-import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,7 @@
 package cz.osu.project.controller;
 
-import cz.osu.project.database.entity.Company;
-import cz.osu.project.database.entity.Contact;
 import cz.osu.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +20,7 @@ public class ProductController {
     @Autowired
     StockItemService stockService;
 
-    @GetMapping("/greeting")
+    @GetMapping("/products")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "greeting";
