@@ -15,7 +15,11 @@ public class Product {
     private String description;
 
     @OneToMany(mappedBy="product")
+    @Column(nullable = true)
     private Set<StockItem> stockItems;
+
+    public Product() {
+    }
 
     public Product(String name, String description) {
         this.name = name;
@@ -65,5 +69,14 @@ public class Product {
 
     public void setStockItems(Set<StockItem> stockItems) {
         this.stockItems = stockItems;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

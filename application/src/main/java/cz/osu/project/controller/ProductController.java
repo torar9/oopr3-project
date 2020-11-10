@@ -1,8 +1,8 @@
 package cz.osu.project.controller;
 
-import cz.osu.project.service.AddressService;
-import cz.osu.project.service.ContactService;
-import cz.osu.project.service.ProductService;
+import cz.osu.project.database.entity.Company;
+import cz.osu.project.database.entity.Contact;
+import cz.osu.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -18,6 +18,10 @@ public class ProductController {
     ContactService contactService;
     @Autowired
     AddressService addressServiceService;
+    @Autowired
+    CompanyService companyService;
+    @Autowired
+    StockItemService stockService;
 
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
@@ -27,8 +31,13 @@ public class ProductController {
 
     @GetMapping("/newItem")
     public String newItem(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-
         model.addAttribute("name", name);
+        /*
+        contactService.create("email@tom.cz", "123456789", "12485546");
+        addressServiceService.create("Majčovičkovičkovova", "101", "56651", "Ostrava", "Slovakia");
+        companyService.create("Company s.r.o.", 1, 1);
+        productService.create("jmeno", "popis");
+        stockService.create(10, 350.0, 1, 1);*/
         return "greeting";
     }
 }

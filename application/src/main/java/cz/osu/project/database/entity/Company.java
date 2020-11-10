@@ -13,6 +13,9 @@ public class Company {
 
     private String name;
 
+    public Company() {
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address", referencedColumnName = "id")
     private Address address;
@@ -22,6 +25,7 @@ public class Company {
     private Contact contact;
 
     @OneToMany(mappedBy = "company")
+    @Column(nullable = true)
     private Set<Expedition> expeditions;
 
     public Company(String name, Address address, Contact contact) {
@@ -76,5 +80,16 @@ public class Company {
 
     public void setExpeditions(Set<Expedition> expeditions) {
         this.expeditions = expeditions;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address=" + address +
+                ", contact=" + contact +
+                ", expeditions=" + expeditions +
+                '}';
     }
 }

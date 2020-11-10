@@ -24,6 +24,9 @@ public class Expedition {
     @JoinColumn(name="company", nullable=false)
     private Company company;
 
+    public Expedition() {
+    }
+
     public Expedition(String status, Company company) {
         this.status = status;
         this.company = company;
@@ -81,5 +84,15 @@ public class Expedition {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    @Override
+    public String toString() {
+        return "Expedition{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", createDate=" + createDate +
+                ", stockItems=" + stockItems +
+                '}';
     }
 }

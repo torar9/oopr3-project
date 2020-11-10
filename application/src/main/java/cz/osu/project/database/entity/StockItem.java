@@ -17,17 +17,20 @@ public class StockItem {
     @CreationTimestamp
     private LocalDateTime storageDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product", nullable=false)
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name="expedition", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="expedition")
     private Expedition expedition;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="company", nullable=false)
     private Company company;
+
+    public StockItem() {
+    }
 
     public StockItem(int quantity, Double price, Product product, Company company) {
         this.quantity = quantity;
@@ -100,5 +103,18 @@ public class StockItem {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    @Override
+    public String toString() {
+        return "StockItem{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", storageDate=" + storageDate +
+                ", product=" + product +
+                ", expedition=" + expedition +
+                ", company=" + company +
+                '}';
     }
 }

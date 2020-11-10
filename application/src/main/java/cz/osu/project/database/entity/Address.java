@@ -18,6 +18,9 @@ public class Address {
     @OneToOne(mappedBy = "address")
     private Company company;
 
+    public Address() {
+    }
+
     public Address(String streetName, String buildingNumber, String postalCode, String city, String state) {
         this.streetName = streetName;
         this.buildingNumber = buildingNumber;
@@ -90,5 +93,17 @@ public class Address {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", streetName='" + streetName + '\'' +
+                ", buildingNumber='" + buildingNumber + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                '}';
     }
 }

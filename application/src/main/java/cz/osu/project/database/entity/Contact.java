@@ -16,6 +16,9 @@ public class Contact {
     @OneToOne(mappedBy = "contact")
     private Company company;
 
+    public Contact() {
+    }
+
     public Contact(long id, String email, String phone, String fax, Company company) {
         this.id = id;
         this.email = email;
@@ -68,5 +71,15 @@ public class Contact {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", fax='" + fax + '\'' +
+                '}';
     }
 }
