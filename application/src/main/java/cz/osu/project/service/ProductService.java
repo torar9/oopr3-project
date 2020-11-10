@@ -27,14 +27,12 @@ public class ProductService {
         return productRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id)
-    {
+    public void delete(long id) {
         Product product = productRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         productRepo.delete(product);
     }
 
-    public List<Product> getAll()
-    {
+    public List<Product> getAll() {
         return productRepo.findAll();
     }
 }

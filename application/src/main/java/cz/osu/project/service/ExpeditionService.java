@@ -34,8 +34,7 @@ public class ExpeditionService {
         return expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id)
-    {
+    public void delete(long id) {
         Expedition expedition = expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         expoRepo.delete(expedition);
     }

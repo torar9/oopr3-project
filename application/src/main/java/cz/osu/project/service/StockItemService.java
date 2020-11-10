@@ -36,14 +36,12 @@ public class StockItemService {
         return stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id)
-    {
+    public void delete(long id) {
         StockItem item = stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         stockItemRepo.delete(item);
     }
 
-    public List<StockItem> getAll()
-    {
+    public List<StockItem> getAll() {
         return stockItemRepo.findAll();
     }
 }

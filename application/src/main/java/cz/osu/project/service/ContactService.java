@@ -27,14 +27,12 @@ public class ContactService {
         return contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id)
-    {
+    public void delete(long id) {
         Contact contact = contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         contactRepo.delete(contact);
     }
 
-    public List<Contact> getAll()
-    {
+    public List<Contact> getAll() {
         return contactRepo.findAll();
     }
 }

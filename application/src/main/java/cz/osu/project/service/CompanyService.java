@@ -35,14 +35,12 @@ public class CompanyService {
         return companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id)
-    {
+    public void delete(long id) {
         Company item = companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         companyRepo.delete(item);
     }
 
-    public List<Company> getAll()
-    {
+    public List<Company> getAll() {
         return companyRepo.findAll();
     }
 }
