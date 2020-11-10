@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Tomáš Silber">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>OOPR3 projekt</title>
     <link rel="stylesheet" type="text/css" media="all" href="bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" media="all" href="style.css" />
 </head>
@@ -16,8 +16,17 @@
     <div id="page-content-wrapper">
         <nav th:insert="fragment/sectionHeader.html"> </nav>
 
-        <div class="container-fluid text-center">
-            <h1 class="mt-4">Produkty</h1>
+        <div class="">
+            <h1 class="mt-4 text-center">Produkty</h1>
+            <div  class="list-group">
+                <a th:each="product: ${products}" href="#" class="list-group-item list-group-item-action align-items-start">
+                    <div class="d-flex w-auto justify-content-between">
+                        <h5 th:text="${product.getName()}" class="mb-1"></h5>
+                        <small th:text="${'ID:' + product.getId()}"></small>
+                    </div>
+                    <p th:text="${product.getDescription()}" class="mb-1"></p>
+                </a>
+            </div>
         </div>
     </div>
 </div>
