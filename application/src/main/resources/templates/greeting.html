@@ -7,6 +7,10 @@
     <link rel="stylesheet" type="text/css" media="all" href="style.css" />
 </head>
 <body>
+    <header th:insert="fragment/header.html"> </header>
+    
     <p th:text="'Hello, ' + ${name} + '!'" />
+
+    <footer th:insert="fragment/footer.html"> </footer>
 </body>
 </html>
