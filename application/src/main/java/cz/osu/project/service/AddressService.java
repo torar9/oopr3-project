@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.List;
 
 @Service
 public class AddressService {
@@ -31,5 +32,8 @@ public class AddressService {
         addressRepo.delete(address);
     }
 
-    public void
+    public List<Address> getAll()
+    {
+        return addressRepo.findAll();
+    }
 }

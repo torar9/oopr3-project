@@ -1,11 +1,13 @@
 package cz.osu.project.service;
 
+import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.List;
 
 @Service
 public class ContactService {
@@ -29,5 +31,10 @@ public class ContactService {
     {
         Contact contact = contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         contactRepo.delete(contact);
+    }
+
+    public List<Contact> getAll()
+    {
+        return contactRepo.findAll();
     }
 }

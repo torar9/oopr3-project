@@ -1,5 +1,6 @@
 package cz.osu.project.service;
 
+import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.database.repository.ExpeditionRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.List;
 
 @Service
 public class ExpeditionService {
@@ -36,5 +38,10 @@ public class ExpeditionService {
     {
         Expedition expedition = expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         expoRepo.delete(expedition);
+    }
+
+    public List<Expedition> getAll()
+    {
+        return expoRepo.findAll();
     }
 }

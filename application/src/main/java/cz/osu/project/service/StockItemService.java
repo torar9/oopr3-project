@@ -1,5 +1,6 @@
 package cz.osu.project.service;
 
+import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.entity.StockItem;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.List;
 
 @Service
 public class StockItemService {
@@ -38,5 +40,10 @@ public class StockItemService {
     {
         StockItem item = stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         stockItemRepo.delete(item);
+    }
+
+    public List<StockItem> getAll()
+    {
+        return stockItemRepo.findAll();
     }
 }

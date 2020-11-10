@@ -1,11 +1,13 @@
 package cz.osu.project.service;
 
+import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -29,5 +31,10 @@ public class ProductService {
     {
         Product product = productRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         productRepo.delete(product);
+    }
+
+    public List<Product> getAll()
+    {
+        return productRepo.findAll();
     }
 }

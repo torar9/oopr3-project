@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.List;
 
 @Service
 public class CompanyService {
@@ -38,5 +39,10 @@ public class CompanyService {
     {
         Company item = companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
         companyRepo.delete(item);
+    }
+
+    public List<Company> getAll()
+    {
+        return companyRepo.findAll();
     }
 }
