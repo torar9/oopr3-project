@@ -1,3 +1,15 @@
+[data-href] {
+    cursor: pointer;
+}
+
+.general-background {
+    background-color: #f3f3f3;}
+
+.table-head {
+    background-color: #343a40;
+    color: white;
+}
+
 #wrapper {
     overflow-x: hidden;
 }
