@@ -13,11 +13,11 @@ public class ProductService {
     @Autowired
     ProductRepository productRepo;
 
-    public void create(String name, String description) {
+    public void create(String name, String description, String manufacturer) {
         if (name == null || description == null)
             throw new NullPointerException();
 
-        Product product = new Product(name, description);
+        Product product = new Product(name, description, manufacturer);
 
         productRepo.save(product);
     }

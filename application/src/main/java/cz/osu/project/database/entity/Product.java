@@ -13,6 +13,7 @@ public class Product {
     @Column(unique=true)
     private String name;
     private String description;
+    private String manufacturer;
 
     @OneToMany(mappedBy="product")
     @Column(nullable = true)
@@ -21,7 +22,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description) {
+    public Product(String name, String description, String manufacturer) {
         this.name = name;
         this.description = description;
     }
@@ -32,11 +33,19 @@ public class Product {
         this.description = description;
     }
 
-    public Product(long id, String name, String description, Set<StockItem> stockItems) {
+    public Product(long id, String name, String description, String manufacturer, Set<StockItem> stockItems) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.stockItems = stockItems;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public long getId() {
