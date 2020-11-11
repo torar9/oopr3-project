@@ -3,6 +3,7 @@ package cz.osu.project.service;
 import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Contact;
+import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,11 @@ public class CompanyService {
         Company item = new Company(name, address, contact);
 
         companyRepo.save(item);
+    }
+
+    public void save(Company company)
+    {
+        companyRepo.save(company);
     }
 
     public Company get(long id) {

@@ -40,6 +40,13 @@ public class Product {
         this.stockItems = stockItems;
     }
 
+    public void set(String name, String description, String manufacturer)
+    {
+        setName(name);
+        setDescription(description);
+        setManufacturer(manufacturer);
+    }
+
     public String getManufacturer() {
         return manufacturer;
     }

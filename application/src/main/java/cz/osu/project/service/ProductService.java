@@ -22,6 +22,11 @@ public class ProductService {
         productRepo.save(product);
     }
 
+    public void save(Product product)
+    {
+        productRepo.save(product);
+    }
+
     public Product get(long id) {
         return productRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }

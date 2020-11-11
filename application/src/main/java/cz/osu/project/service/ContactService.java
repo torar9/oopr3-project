@@ -2,6 +2,7 @@ package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Contact;
+import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,11 @@ public class ContactService {
 
         Contact contact = new Contact(email, phone, fax);
 
+        contactRepo.save(contact);
+    }
+
+    public void save(Contact contact)
+    {
         contactRepo.save(contact);
     }
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -35,6 +36,22 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public String getProduct(@PathVariable long id, Model model) {
         Product product = productService.get(id);
+        model.addAttribute("product", product);
+
+        return "product";
+    }
+
+    @PostMapping("/product/{id}")
+    public String postProduct(@PathVariable long id,
+                              @RequestParam(name="name", required=true)String name,
+                              @RequestParam(name="desc", required=true)String desc,
+                              @RequestParam(name="manufacturer", required=true)String manufacturer,
+                              Model model) {
+        Product product = productService.get(id);
+        product.set(name, desc, manufacturer);
+        productService.save(product);
+
+        product = productService.get(id);
         model.addAttribute("product", product);
 
         return "product";

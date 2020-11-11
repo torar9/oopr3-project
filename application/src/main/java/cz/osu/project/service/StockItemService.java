@@ -30,6 +30,11 @@ public class StockItemService {
         stockItemRepo.save(item);
     }
 
+    public void save(StockItem stockItem)
+    {
+        stockItemRepo.save(stockItem);
+    }
+
     public StockItem get(long id) {
         return stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }

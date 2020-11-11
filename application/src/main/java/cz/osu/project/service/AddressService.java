@@ -1,6 +1,7 @@
 package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Address;
+import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,11 @@ public class AddressService {
 
         Address address = new Address(streetName, buildingNumber, postalCode, city, state);
 
+        addressRepo.save(address);
+    }
+
+    public void save(Address address)
+    {
         addressRepo.save(address);
     }
 
