@@ -18,14 +18,14 @@ public class StockItemService {
     @Autowired
     CompanyService companyService;
 
-    public void create(int quantity, Double price, long productID, long companyID) {
+    public void create(int quantity, Double price, Double weight, long productID, long companyID) {
         if (price == null)
             throw new NullPointerException();
 
         Product product = productService.get(productID);
         Company comp = companyService.get(companyID);
 
-        StockItem item = new StockItem(quantity, price, product, comp);
+        StockItem item = new StockItem(quantity, price, weight, product, comp);
 
         stockItemRepo.save(item);
     }

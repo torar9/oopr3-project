@@ -14,6 +14,7 @@ public class StockItem {
     private long id;
     private int quantity;
     private Double price;
+    private Double weight;
     @CreationTimestamp
     private LocalDateTime storageDate;
 
@@ -32,14 +33,15 @@ public class StockItem {
     public StockItem() {
     }
 
-    public StockItem(int quantity, Double price, Product product, Company company) {
+    public StockItem(int quantity, Double price, Double weight, Product product, Company company) {
         this.quantity = quantity;
         this.price = price;
         this.product = product;
         this.company = company;
+        this.weight = weight;
     }
 
-    public StockItem(long id, int quantity, Double price, LocalDateTime storageDate, Product product, Expedition expedition, Company company) {
+    public StockItem(long id, int quantity, Double price, Double weight, LocalDateTime storageDate, Product product, Expedition expedition, Company company) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
@@ -47,6 +49,15 @@ public class StockItem {
         this.product = product;
         this.expedition = expedition;
         this.company = company;
+        this.weight = weight;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
     public long getId() {
@@ -115,6 +126,7 @@ public class StockItem {
                 ", product=" + product +
                 ", expedition=" + expedition +
                 ", company=" + company +
+                ", weight=" + weight +
                 '}';
     }
 }
