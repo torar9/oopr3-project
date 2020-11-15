@@ -25,6 +25,7 @@ public class Product {
     public Product(String name, String description, String manufacturer) {
         this.name = name;
         this.description = description;
+        this.manufacturer = manufacturer;
     }
 
     public Product(int id, String name, String description) {
