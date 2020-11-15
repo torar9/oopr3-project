@@ -13,17 +13,28 @@ public class ProductService {
     @Autowired
     ProductRepository productRepo;
 
-    public void create(String name, String description, String manufacturer) {
-        if (name == null || description == null)
-            throw new NullPointerException();
+    public Product create(String name, String description, String manufacturer) throws Exception {
+        if(name == null || name.isEmpty())
+            throw new Exception("Jméno musí být vyplněno");
+        if(description == null || description.isEmpty())
+            throw new Exception("Popis musí být vyplněn");
+        if(manufacturer == null || manufacturer.isEmpty())
+            throw new Exception("Výrobce musí být vyplněn");
 
         Product product = new Product(name, description, manufacturer);
 
-        productRepo.save(product);
+        return productRepo.save(product);
     }
 
-    public void save(Product product)
+    public void save(Product product) throws Exception
     {
+        if(product.getName() == null || product.getName().isEmpty())
+            throw new Exception("Jméno musí být vyplněno");
+        if(product.getDescription() == null || product.getDescription().isEmpty())
+            throw new Exception("Popis musí být vyplněn");
+        if(product.getManufacturer() == null || product.getManufacturer().isEmpty())
+            throw new Exception("Výrobce musí být vyplněn");
+
         productRepo.save(product);
     }
 
@@ -32,7 +43,7 @@ public class ProductService {
     }
 
     public void delete(long id) {
-        Product product = productRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
+        Product product = productRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         productRepo.delete(product);
     }
 

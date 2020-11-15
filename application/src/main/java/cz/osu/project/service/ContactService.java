@@ -15,13 +15,13 @@ public class ContactService {
     @Autowired
     ContactRepository contactRepo;
 
-    public void create(String email, String phone, String fax) {
+    public Contact create(String email, String phone, String fax) {
         if (email == null || phone == null)
             throw new NullPointerException();
 
         Contact contact = new Contact(email, phone, fax);
 
-        contactRepo.save(contact);
+        return contactRepo.save(contact);
     }
 
     public void save(Contact contact)
@@ -34,7 +34,7 @@ public class ContactService {
     }
 
     public void delete(long id) {
-        Contact contact = contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
+        Contact contact = contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         contactRepo.delete(contact);
     }
 

@@ -14,13 +14,13 @@ public class AddressService {
     @Autowired
     AddressRepository addressRepo;
 
-    public void create(String streetName, String buildingNumber, String postalCode, String city, String state) {
+    public Address create(String streetName, String buildingNumber, String postalCode, String city, String state) {
         if (streetName == null || buildingNumber == null || postalCode == null || city == null || state == null)
             throw new NullPointerException();
 
         Address address = new Address(streetName, buildingNumber, postalCode, city, state);
 
-        addressRepo.save(address);
+        return addressRepo.save(address);
     }
 
     public void save(Address address)
@@ -34,7 +34,7 @@ public class AddressService {
 
     public void delete(long id)
     {
-        Address address = addressRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
+        Address address = addressRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         addressRepo.delete(address);
     }
 

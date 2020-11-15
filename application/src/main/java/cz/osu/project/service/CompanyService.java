@@ -20,7 +20,7 @@ public class CompanyService {
     @Autowired
     ContactService contactService;
 
-    public void create(String name, long addressID, long contactID) {
+    public Company create(String name, long addressID, long contactID) {
         if (name == null)
             throw new NullPointerException();
 
@@ -29,7 +29,7 @@ public class CompanyService {
 
         Company item = new Company(name, address, contact);
 
-        companyRepo.save(item);
+        return companyRepo.save(item);
     }
 
     public void save(Company company)
@@ -42,7 +42,7 @@ public class CompanyService {
     }
 
     public void delete(long id) {
-        Company item = companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
+        Company item = companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         companyRepo.delete(item);
     }
 

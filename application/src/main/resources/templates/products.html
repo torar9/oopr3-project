@@ -5,7 +5,16 @@
 <div class="d-flex" id="wrapper">
     <nav th:insert="fragment/navigation.html"> </nav>
     <div class="" id="page-content-wrapper">
-        <nav th:insert="fragment/sectionHeader.html"> </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <form action="product/new"><button class="btn btn-primary btn-dark" id="new-btn">Vytvořit</button></form>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">...<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
         <h3 class="m-3 text-center">Produkty</h3>
 

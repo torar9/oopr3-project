@@ -18,20 +18,27 @@ public class StockItemService {
     @Autowired
     CompanyService companyService;
 
-    public void create(int quantity, Double price, Double weight, long productID, long companyID) {
-        if (price == null)
-            throw new NullPointerException();
+    public StockItem create(int quantity, Double price, Double weight, long productID, long companyID) throws Exception {
+        if(price == null)
+            throw new Exception("Neplatná cena");
+        if(weight == null)
+            throw new Exception("Neplatná váha");
 
         Product product = productService.get(productID);
         Company comp = companyService.get(companyID);
 
         StockItem item = new StockItem(quantity, price, weight, product, comp);
 
-        stockItemRepo.save(item);
+        return stockItemRepo.save(item);
     }
 
-    public void save(StockItem stockItem)
+    public void save(StockItem stockItem) throws Exception
     {
+        if(stockItem.getPrice() == null)
+            throw new Exception("Neplatná cena");
+        if(stockItem.getWeight() == null)
+            throw new Exception("Neplatná váha");
+
         stockItemRepo.save(stockItem);
     }
 
@@ -40,7 +47,7 @@ public class StockItemService {
     }
 
     public void delete(long id) {
-        StockItem item = stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
+        StockItem item = stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         stockItemRepo.delete(item);
     }
 

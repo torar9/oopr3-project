@@ -5,10 +5,8 @@ import cz.osu.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -49,7 +47,13 @@ public class ProductController {
                               Model model) {
         Product product = productService.get(id);
         product.set(name, desc, manufacturer);
-        productService.save(product);
+        try {
+            productService.save(product);
+            model.addAttribute("message", "Upraveno");
+        }
+        catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
 
         product = productService.get(id);
         model.addAttribute("product", product);
@@ -67,25 +71,14 @@ public class ProductController {
                                  @RequestParam(name="desc", required=true)String desc,
                                  @RequestParam(name="manufacturer", required=true)String manufacturer,
                                  Model model) {
-        String message = "";
-        if(name.isEmpty())
-            message = "Jméno musí být vyplněno";
-        if(desc.isEmpty())
-            message = "Popis musí být vyplněn";
-        if(manufacturer.isEmpty())
-            message = "Výrobce musí být vyplněn";
-
-        model.addAttribute("message", message);
-
-        Product product = new Product(name, desc, manufacturer);
-        productService.save(product);
+        try {
+            Product product = productService.create(name, desc, manufacturer);
+            return "redirect:/product/" + product.getId();
+        }
+        catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
 
         return "product";
-    }
-
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting";
     }
 }
