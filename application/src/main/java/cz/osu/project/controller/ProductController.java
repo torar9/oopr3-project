@@ -57,6 +57,32 @@ public class ProductController {
         return "product";
     }
 
+    @GetMapping("/product/new")
+    public String getNewProduct(Model model) {
+        return "product";
+    }
+
+    @PostMapping("/product/new")
+    public String postNewProduct(@RequestParam(name="name", required=true)String name,
+                                 @RequestParam(name="desc", required=true)String desc,
+                                 @RequestParam(name="manufacturer", required=true)String manufacturer,
+                                 Model model) {
+        String message = "";
+        if(name.isEmpty())
+            message = "Jméno musí být vyplněno";
+        if(desc.isEmpty())
+            message = "Popis musí být vyplněn";
+        if(manufacturer.isEmpty())
+            message = "Výrobce musí být vyplněn";
+
+        model.addAttribute("message", message);
+
+        Product product = new Product(name, desc, manufacturer);
+        productService.save(product);
+
+        return "product";
+    }
+
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
