@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cs">
+<head th:insert="fragment/htmlHead.html"> </head>
+<body class="general-background">
+<div class="d-flex" id="wrapper">
+    <nav th:insert="fragment/navigation.html"> </nav>
+    <div class="" id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <form action="/companies"><button class="btn btn-primary btn-dark" id="new-btn">Zpátky</button></form>
+            <form th:if="${company != null}" th:action="'/company/' + ${company.getId()} + '/delete'"><button class="btn btn-primary btn-warning ml-1" id="delete-btn">Smazat</button></form>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">...<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <h3 class="m-3 text-center">Společnost</h3>
+
+        <div th:if="${company != null}" class="container bg-white p-5 shadow">
+            <form method="post">
+                <label th:if="${message != null}" style="color: #1e7e34;" th:text="${message}"></label>
+                <label class="text-danger" th:text="${error}"></label>
+                <br>
+                <label th:text="${'ID: ' + company.getId()}"></label>
+                <input type="hidden" id="Id" name="id" value="1">
+                <div class="form-group">
+                    <label>Název <label style="color:gray;">*</label></label>
+                    <input th:value="${company.getName()}" class="form-control" type="text" placeholder="Název..." id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label>Adresa <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="address" name="address">
+                        <option th:selected="${company.getAddress().getId() == address.getId()}" th:value="${address.getId()}" th:text="${address.getStreetName() + ' ' + address.getBuildingNumber() + ' ' + address.getCity() + ' ' + address.getState()}" th:each="address: ${addresses}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Adresa <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="contact" name="contact">
+                        <option th:selected="${company.getContact().getId() == contact.getId()}" th:value="${contact.getId()}" th:text="${contact.getEmail() + ' ' + contact.getPhone() + ' ' + contact.getFax()}" th:each="contact: ${contacts}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-dark">Upravit</button>
+                <br>
+                <label style="color:gray;" class="mt-5">* povinný údaj</label>
+            </form>
+        </div>
+
+        <div th:if="${company == null}" class="container bg-white p-5 shadow">
+            <form method="post">
+                <label class="text-danger" th:text="${error}"></label>
+                <input type="hidden" id="Id" name="id" value="1">
+                <div class="form-group">
+                    <label>Název <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="text" placeholder="Název..." id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label>Adresa <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="address" name="address">
+                        <option th:value="${address.getId()}" th:text="${address.getStreetName() + ' ' + address.getBuildingNumber() + ' ' + address.getCity() + ' ' + address.getState()}" th:each="address: ${addresses}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Adresa <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="contact" name="contact">
+                        <option th:value="${contact.getId()}" th:text="${contact.getEmail() + ' ' + contact.getPhone() + ' ' + contact.getFax()}" th:each="contact: ${contacts}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-dark">Odeslat</button>
+                <br>
+                <label style="color:gray;" class="mt-5">* povinný údaj</label>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<div th:insert="fragment/footer.html"> </div>
+</body>
+</html>

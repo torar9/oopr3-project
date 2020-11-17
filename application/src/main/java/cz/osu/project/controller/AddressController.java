@@ -1,9 +1,7 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Address;
-import cz.osu.project.database.entity.Product;
 import cz.osu.project.service.AddressService;
-import cz.osu.project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,6 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Contact;
-import cz.osu.project.database.entity.Product;
 import cz.osu.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
