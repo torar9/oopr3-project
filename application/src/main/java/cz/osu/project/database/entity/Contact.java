@@ -33,6 +33,13 @@ public class Contact {
         this.fax = fax;
     }
 
+    public void set(String email, String phone, String fax)
+    {
+        setEmail(email);
+        setPhone(phone);
+        setFax(fax);
+    }
+
     public long getId() {
         return id;
     }

@@ -39,6 +39,15 @@ public class Address {
         this.company = company;
     }
 
+    public void set(String streetName, String buildingNumber, String postalCode, String city, String state)
+    {
+        setStreetName(streetName);
+        setBuildingNumber(buildingNumber);
+        setPostalCode(postalCode);
+        setCity(city);
+        setState(state);
+    }
+
     public long getId() {
         return id;
     }
