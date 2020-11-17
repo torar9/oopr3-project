@@ -1,4 +1,4 @@
-<head>
+<head xmlns:th="http://www.w3.org/1999/xhtml">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -7,8 +7,11 @@
 
     <title>OOPR3 projekt</title>
     <link rel="icon" href="image/favicon.png" sizes="any" type="image/png+xml">
-    <link rel="stylesheet" type="text/css" media="all" href="bootstrap/css/bootstrap.css" />
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.css}"
+          rel="stylesheet" media="screen" />
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/3.5.1/jquery.js"
+            th:src="@{/webjars/jquery/3.5.1/jquery.js}"></script>
     <link rel="stylesheet" type="text/css" media="all" href="style.css" />
-    <script src="jquery.js"></script>
     <script src="script.js"></script>
 </head>
