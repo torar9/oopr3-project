@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cs">
+<head th:insert="fragment/htmlHead.html"> </head>
+<body class="general-background">
+<div class="d-flex" id="wrapper">
+    <nav th:insert="fragment/navigation.html"> </nav>
+    <div class="" id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <form action="address/new"><button class="btn btn-primary btn-dark" id="new-btn">Vytvořit</button></form>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">...<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <h3 class="m-3 text-center">Adresy</h3>
+
+        <div class="container bg-white p-5 shadow">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th class="table-head" scope="col">ID</th>
+                    <th class="table-head" scope="col">Název ulice</th>
+                    <th class="table-head" scope="col">Číslo popisné</th>
+                    <th class="table-head" scope="col">PSČ</th>
+                    <th class="table-head" scope="col">Město</th>
+                    <th class="table-head" scope="col">Stát</th>
+                </tr>
+                <tbody>
+                <tr class='clickable-row' th:attr="data-href='/address/' + ${address.getId()}"  th:each="address: ${addresses}">
+                    <th th:text="${address.getId()}" scope="row"></th>
+                    <th th:text="${address.getStreetName()}"></th>
+                    <th th:text="${address.getBuildingNumber()}"></th>
+                    <th th:text="${address.getPostalCode()}"></th>
+                    <th th:text="${address.getCity()}"></th>
+                    <th th:text="${address.getState()}"></th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+<div th:insert="fragment/footer.html"> </div>
+</body>
+</html>

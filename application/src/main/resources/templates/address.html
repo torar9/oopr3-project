@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cs">
+<head th:insert="fragment/htmlHead.html"> </head>
+<body class="general-background">
+<div class="d-flex" id="wrapper">
+    <nav th:insert="fragment/navigation.html"> </nav>
+    <div class="" id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <form action="/addresses"><button class="btn btn-primary btn-dark" id="new-btn">Zpátky</button></form>
+            <form th:if="${address != null}" th:action="'/address/' + ${address.getId()} + '/delete'"><button class="btn btn-primary btn-warning ml-1" id="delete-btn">Smazat</button></form>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">...<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <h3 class="m-3 text-center">Adresa</h3>
+
+        <div th:if="${address != null}" class="container bg-white p-5 shadow">
+            <form method="post">
+                <label th:if="${message != null}" style="color: #1e7e34;" th:text="${message}"></label>
+                <label class="text-danger" th:text="${error}"></label>
+                <br>
+                <label th:text="${'ID: ' + address.getId()}"></label>
+                <input type="hidden" id="Id" name="id" value="1">
+                <div class="form-group">
+                    <label>Název ulice <label style="color:gray;">*</label></label>
+                    <input th:value="${address.getStreetName()}" class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName">
+                </div>
+                <div class="form-group">
+                    <label>Číslo popisné <label style="color:gray;">*</label></label>
+                    <input th:value="${address.getBuildingNumber()}" class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber">
+                </div>
+                <div class="form-group">
+                    <label>PSČ <label style="color:gray;">*</label></label>
+                    <input th:value="${address.getPostalCode()}" class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode">
+                </div>
+                <div class="form-group">
+                    <label>Město <label style="color:gray;">*</label></label>
+                    <input th:value="${address.getCity()}" class="form-control" type="text" placeholder="Město..." id="city" name="city">
+                </div>
+                <div class="form-group">
+                    <label>Stát <label style="color:gray;">*</label></label>
+                    <input th:value="${address.getState()}" class="form-control" type="text" placeholder="Stát..." id="state" name="state">
+                </div>
+                <button type="submit" class="btn btn-primary btn-dark">Upravit</button>
+                <br>
+                <label style="color:gray;" class="mt-5">* povinný údaj</label>
+            </form>
+        </div>
+
+        <div th:if="${address == null}" class="container bg-white p-5 shadow">
+            <form method="post">
+                <label class="text-danger" th:text="${error}"></label>
+                <br>
+                <input type="hidden" id="Id" name="id" value="1">
+                <div class="form-group">
+                    <label>Název ulice <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName">
+                </div>
+                <div class="form-group">
+                    <label>Číslo popisné <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber">
+                </div>
+                <div class="form-group">
+                    <label>PSČ <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode">
+                </div>
+                <div class="form-group">
+                    <label>Město <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="text" placeholder="Město..." id="city" name="city">
+                </div>
+                <div class="form-group">
+                    <label>Stát <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="text" placeholder="Stát..." id="state" name="state">
+                </div>
+                <button type="submit" class="btn btn-primary btn-dark">Odeslat</button>
+                <br>
+                <label style="color:gray;" class="mt-5">* povinný údaj</label>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<div th:insert="fragment/footer.html"> </div>
+</body>
+</html>
