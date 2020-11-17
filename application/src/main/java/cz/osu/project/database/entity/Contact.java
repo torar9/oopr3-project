@@ -1,6 +1,7 @@
 package cz.osu.project.database.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "Contact")
 @Table(name = "contact")
@@ -13,18 +14,26 @@ public class Contact {
     private String phone;
     private String fax;
 
-    @OneToOne(mappedBy = "contact")
-    private Company company;
+    @OneToMany(mappedBy="contact")
+    @Column(nullable = true)
+    private Set<Company> companies;
 
     public Contact() {
     }
 
-    public Contact(long id, String email, String phone, String fax, Company company) {
+    public Contact(long id, String email, String phone, String fax, Set<Company> companies) {
         this.id = id;
         this.email = email;
         this.phone = phone;
         this.fax = fax;
-        this.company = company;
+        this.companies = companies;
+    }
+
+    public Contact(long id, String email, String phone, String fax) {
+        this.id = id;
+        this.email = email;
+        this.phone = phone;
+        this.fax = fax;
     }
 
     public Contact(String email, String phone, String fax) {
@@ -72,12 +81,12 @@ public class Contact {
         this.fax = fax;
     }
 
-    public Company getCompany() {
-        return company;
+    public Set<Company> getCompanies() {
+        return companies;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
     }
 
     @Override

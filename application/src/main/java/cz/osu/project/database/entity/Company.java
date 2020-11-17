@@ -10,23 +10,21 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-
     private String name;
-
-    public Company() {
-    }
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="address", nullable=false)
     private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="contact", nullable=false)
     private Contact contact;
 
     @OneToMany(mappedBy = "company")
     @Column(nullable = true)
     private Set<Expedition> expeditions;
+
+    public Company() {
+    }
 
     public Company(String name, Address address, Contact contact) {
         this.name = name;
@@ -40,6 +38,13 @@ public class Company {
         this.address = address;
         this.contact = contact;
         this.expeditions = expeditions;
+    }
+
+    public void set(String name, Address address, Contact contact)
+    {
+        setName(name);
+        this.address = address;
+        this.contact = contact;
     }
 
     public long getId() {

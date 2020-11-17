@@ -1,6 +1,7 @@
 package cz.osu.project.database.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "Address")
 @Table(name = "address")
@@ -15,10 +16,21 @@ public class Address {
     private String city;
     private String state;
 
-    @OneToOne(mappedBy = "address")
-    private Company company;
+    @OneToMany(mappedBy="address")
+    @Column(nullable = true)
+    private Set<Company> companies;
 
     public Address() {
+    }
+
+    public Address(long id, String streetName, String buildingNumber, String postalCode, String city, String state, Set<Company> companies) {
+        this.id = id;
+        this.streetName = streetName;
+        this.buildingNumber = buildingNumber;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.state = state;
+        this.companies = companies;
     }
 
     public Address(String streetName, String buildingNumber, String postalCode, String city, String state) {
@@ -29,14 +41,13 @@ public class Address {
         this.state = state;
     }
 
-    public Address(long id, String streetName, String buildingNumber, String postalCode, String city, String state, Company company) {
+    public Address(long id, String streetName, String buildingNumber, String postalCode, String city, String state) {
         this.id = id;
         this.streetName = streetName;
         this.buildingNumber = buildingNumber;
         this.postalCode = postalCode;
         this.city = city;
         this.state = state;
-        this.company = company;
     }
 
     public void set(String streetName, String buildingNumber, String postalCode, String city, String state)
@@ -96,12 +107,12 @@ public class Address {
         this.state = state;
     }
 
-    public Company getCompany() {
-        return company;
+    public Set<Company> getAddresses() {
+        return companies;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setAddresses(Set<Company> addresses) {
+        this.companies = companies;
     }
 
     @Override
