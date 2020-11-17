@@ -66,6 +66,21 @@ public class ProductController {
         return "product";
     }
 
+    @GetMapping("/product/{id}/delete")
+    public String getNewProduct(@PathVariable long id, Model model) {
+        productService.delete(id);
+
+        return "redirect:/products";
+    }
+
+    @DeleteMapping("/product/{id}")
+    public String deleteProduct(@PathVariable long id)
+    {
+        productService.delete(id);
+
+        return "redirect:/products";
+    }
+
     @PostMapping("/product/new")
     public String postNewProduct(@RequestParam(name="name", required=true)String name,
                                  @RequestParam(name="desc", required=true)String desc,
