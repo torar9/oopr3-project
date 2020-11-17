@@ -59,15 +59,7 @@ public class ContactController {
     }
 
     @GetMapping("/contact/{id}/delete")
-    public String getNewContact(@PathVariable long id, Model model) {
-        contactService.delete(id);
-
-        return "redirect:/contacts";
-    }
-
-    @DeleteMapping("/contact/{id}")
-    public String deleteContact(@PathVariable long id)
-    {
+    public String deleteContact(@PathVariable long id, Model model) {
         contactService.delete(id);
 
         return "redirect:/contacts";
