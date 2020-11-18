@@ -1,6 +1,7 @@
 package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Company;
+import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.entity.StockItem;
 import cz.osu.project.database.repository.StockItemRepository;
@@ -17,8 +18,10 @@ public class StockItemService {
     ProductService productService;
     @Autowired
     CompanyService companyService;
+    @Autowired
+    ExpeditionService expeditionService;
 
-    public StockItem create(int quantity, Double price, Double weight, long productID, long companyID) throws Exception {
+    public StockItem create(int quantity, Double price, Double weight, long productID, long companyID, long expeditionID) throws Exception {
         if(price == null)
             throw new Exception("Neplatná cena");
         if(weight == null)
@@ -26,8 +29,9 @@ public class StockItemService {
 
         Product product = productService.get(productID);
         Company comp = companyService.get(companyID);
-
-        StockItem item = new StockItem(quantity, price, weight, product, comp);
+        Expedition expedition = expeditionService.get(expeditionID);
+//long id, int quantity, Double price, Double weight, LocalDateTime storageDate, Product product, Expedition expedition, Company company
+        StockItem item = new StockItem(quantity, price, weight, product, comp, expedition);
 
         return stockItemRepo.save(item);
     }

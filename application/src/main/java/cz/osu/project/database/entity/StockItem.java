@@ -3,6 +3,7 @@ package cz.osu.project.database.entity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "StockItem")
@@ -33,12 +34,13 @@ public class StockItem {
     public StockItem() {
     }
 
-    public StockItem(int quantity, Double price, Double weight, Product product, Company company) {
+    public StockItem(int quantity, Double price, Double weight, Product product, Company company, Expedition expedition) {
         this.quantity = quantity;
         this.price = price;
         this.product = product;
         this.company = company;
         this.weight = weight;
+        this.expedition = expedition;
     }
 
     public StockItem(long id, int quantity, Double price, Double weight, LocalDateTime storageDate, Product product, Expedition expedition, Company company) {
@@ -50,6 +52,25 @@ public class StockItem {
         this.expedition = expedition;
         this.company = company;
         this.weight = weight;
+    }
+    /*
+    @RequestParam(name="expedition", required = false) long expedition,
+                              @RequestParam(name="suplier", required=false)long suplier,
+                              @RequestParam(name="product", required=true)long product,
+                              @RequestParam(name="quantity", required=true)int quantity,
+                              @RequestParam(name="price", required=true)Double price,
+                              @RequestParam(name="weight", required=true)Double weight,
+                              @RequestParam(name="storageDate", required=true)LocalDateTime storageDate,
+     */
+    public void set(Expedition expedition, Company suplier, Product product, int quantity, Double price, Double weight, LocalDateTime storageDate)
+    {
+        setExpedition(expedition);
+        setCompany(suplier);
+        setProduct(product);
+        setQuantity(quantity);
+        setPrice(price);
+        setWeight(weight);
+        setStorageDate(storageDate);
     }
 
     public Double getWeight() {

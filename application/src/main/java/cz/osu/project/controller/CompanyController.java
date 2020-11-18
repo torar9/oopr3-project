@@ -26,6 +26,12 @@ public class CompanyController {
     @Autowired
     ContactService contactService;
 
+    @GetMapping("/")
+    public String getRoot()
+    {
+        return "redirect:/companies";
+    }
+
     @GetMapping("/companies")
     public String getCompanies(Model model) {
         List<Company> products = companyService.getAll();

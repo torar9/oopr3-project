@@ -13,11 +13,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>project</name>
 	<description>OOPR3 project</description>
-
 	<properties>
 		<java.version>15</java.version>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -63,7 +61,6 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -72,5 +69,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
