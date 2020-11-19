@@ -28,11 +28,11 @@
                 <input th:value="${contact.getId()}" type="hidden" id="id" name="id">
                 <div class="form-group">
                     <label>E-mail <label style="color:gray;">*</label></label>
-                    <input th:value="${contact.getEmail()}" class="form-control" type="email" placeholder="e-mail" id="email" name="email">
+                    <input th:value="${contact.getEmail()}" class="form-control" type="email" placeholder="e-mail" id="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label>Telefonní číslo <label style="color:gray;">*</label></label>
-                    <input th:value="${contact.getPhone()}" class="form-control" type="text" placeholder="Telefonní číslo..." id="phone" name="phone">
+                    <input th:value="${contact.getPhone()}" class="form-control" type="text" placeholder="Telefonní číslo..." id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
                     <label>Fax</label>
@@ -49,11 +49,11 @@
                 <label class="text-danger" th:text="${error}"></label>
                 <div class="form-group">
                     <label>E-mail <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="email" placeholder="E-mail..." id="email" name="email">
+                    <input class="form-control" type="email" placeholder="E-mail..." id="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label>Telefonní číslo <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="text" placeholder="Telefonní číslo..." id="phone" name="phone">
+                    <input class="form-control" type="text" placeholder="Telefonní číslo..." id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
                     <label>Fax</label>
