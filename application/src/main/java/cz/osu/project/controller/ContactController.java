@@ -23,7 +23,7 @@ public class ContactController {
     }
 
     @GetMapping("/contact/{id}")
-    public String getContact(@PathVariable long id, Model model) {
+    public String getContact(@PathVariable Long id, Model model) {
         Contact contact = contactService.get(id);
         model.addAttribute("contact", contact);
 
@@ -31,7 +31,7 @@ public class ContactController {
     }
 
     @PostMapping("/contact/{id}")
-    public String postContact(@PathVariable long id,
+    public String postContact(@PathVariable Long id,
                               @RequestParam(name="email", required=true)String email,
                               @RequestParam(name="phone", required=true)String phone,
                               @RequestParam(name="fax", required=false)String fax,
@@ -58,7 +58,7 @@ public class ContactController {
     }
 
     @GetMapping("/contact/{id}/delete")
-    public String deleteContact(@PathVariable long id, Model model) {
+    public String deleteContact(@PathVariable Long id, Model model) {
         contactService.delete(id);
 
         return "redirect:/contacts";

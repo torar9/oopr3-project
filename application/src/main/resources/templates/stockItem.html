@@ -26,6 +26,8 @@
                 <br>
                 <label th:text="${'ID: ' + stockItem.getId()}"></label>
                 <input th:value="${stockItem.getId()}" type="hidden" id="id" name="id">
+                <br>
+                <label th:text="${'Datum naskladnění: ' + #temporals.format(stockItem.getStorageDate(), 'dd-MM-yyyy HH:mm')}"></label>
                 <div class="form-group">
                     <label>Zboží <label style="color:gray;">*</label></label>
                     <select class="custom-select" id="product" name="product">
@@ -33,9 +35,14 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Zásobovatel <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="suplier" name="suplier">
+                        <option th:selected="${stockItem.getCompany() == suplier.getId()}" th:value="${suplier.getId()}" th:text="${suplier.getName()}" th:each="suplier: ${supliers}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>ID expedice <label style="color:gray;">*</label></label>
                     <select class="custom-select" id="expedition" name="expedition">
-                        <option th:value=""></option>
                         <option th:selected="${stockItem.getExpedition()?.getId() == expedetion?.getId()}" th:value="${expedetion.getId()}" th:text="${expedetion.getId()}" th:each="expedetion: ${expeditions}"></option>
                     </select>
                 </div>
@@ -48,8 +55,8 @@
                     <input th:value="${stockItem.getPrice()}" class="form-control" type="number" placeholder="Cena Kč..." id="price" name="price" required>
                 </div>
                 <div class="form-group">
-                    <label>Datum naskladnění <label style="color:gray;">*</label></label>
-                    <input th:value="${stockItem.getStorageDate()}" class="form-control" type="date" id="storageDate" name="storageDate" required>
+                    <label>Váha v gramech <label style="color:gray;">*</label></label>
+                    <input th:value="${stockItem.getWeight()}" class="form-control" type="number" placeholder="Váha v gramech..." id="weight" name="weight" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Upravit</button>
                 <br>
@@ -67,9 +74,14 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Zásobovatel <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="suplier" name="suplier">
+                        <option th:value="${suplier.getId()}" th:text="${suplier.getName()}" th:each="suplier: ${supliers}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>ID expedice <label style="color:gray;">*</label></label>
                     <select class="custom-select" id="expedition" name="expedition">
-                        <option value=""></option>
                         <option th:value="${expedetion.getId()}" th:text="${expedetion.getId()}" th:each="expedetion: ${expeditions}"></option>
                     </select>
                 </div>
@@ -82,8 +94,8 @@
                     <input class="form-control" type="number" placeholder="Cena Kč..." id="price" name="price" required>
                 </div>
                 <div class="form-group">
-                    <label>Datum naskladnění <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="date" id="storageDate" name="storageDate" required>
+                    <label>Váha v gramech <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="number" placeholder="Váha v gramech..." id="weight" name="weight" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Odeslat</button>
                 <br>

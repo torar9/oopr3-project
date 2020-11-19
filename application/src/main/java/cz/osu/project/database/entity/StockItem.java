@@ -3,7 +3,6 @@ package cz.osu.project.database.entity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "StockItem")
@@ -13,7 +12,7 @@ public class StockItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    private int quantity;
+    private Integer quantity;
     private Double price;
     private Double weight;
     @CreationTimestamp
@@ -24,7 +23,7 @@ public class StockItem {
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="expedition")
+    @JoinColumn(name="expedition", nullable=true)
     private Expedition expedition;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -53,16 +52,8 @@ public class StockItem {
         this.company = company;
         this.weight = weight;
     }
-    /*
-    @RequestParam(name="expedition", required = false) long expedition,
-                              @RequestParam(name="suplier", required=false)long suplier,
-                              @RequestParam(name="product", required=true)long product,
-                              @RequestParam(name="quantity", required=true)int quantity,
-                              @RequestParam(name="price", required=true)Double price,
-                              @RequestParam(name="weight", required=true)Double weight,
-                              @RequestParam(name="storageDate", required=true)LocalDateTime storageDate,
-     */
-    public void set(Expedition expedition, Company suplier, Product product, int quantity, Double price, Double weight, LocalDateTime storageDate)
+
+    public void set(Expedition expedition, Company suplier, Product product, int quantity, Double price, Double weight)
     {
         setExpedition(expedition);
         setCompany(suplier);
@@ -70,7 +61,6 @@ public class StockItem {
         setQuantity(quantity);
         setPrice(price);
         setWeight(weight);
-        setStorageDate(storageDate);
     }
 
     public Double getWeight() {
@@ -89,11 +79,11 @@ public class StockItem {
         this.id = id;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

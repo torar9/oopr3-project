@@ -18,7 +18,7 @@ public class ExpeditionService {
     @Autowired
     StockItemService stockItemService;
 
-    public Expedition create(long companyID, String status) {
+    public Expedition create(Long companyID, String status) {
         if (status == null)
             throw new NullPointerException();
 
@@ -34,11 +34,11 @@ public class ExpeditionService {
         expoRepo.save(expedition);
     }
 
-    public Expedition get(long id) {
+    public Expedition get(Long id) {
         return expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id) {
+    public void delete(Long id) {
         Expedition expedition = expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         expoRepo.delete(expedition);
     }

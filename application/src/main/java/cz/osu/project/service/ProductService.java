@@ -38,11 +38,11 @@ public class ProductService {
         productRepo.save(product);
     }
 
-    public Product get(long id) {
+    public Product get(Long id) {
         return productRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id) {
+    public void delete(Long id) {
         Product product = productRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         productRepo.delete(product);
     }

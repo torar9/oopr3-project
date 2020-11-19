@@ -27,11 +27,11 @@ public class ContactService {
         contactRepo.save(contact);
     }
 
-    public Contact get(long id) {
+    public Contact get(Long id) {
         return contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id) {
+    public void delete(Long id) {
         Contact contact = contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         contactRepo.delete(contact);
     }

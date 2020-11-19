@@ -3,7 +3,6 @@ package cz.osu.project.controller;
 import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Contact;
-import cz.osu.project.database.entity.Product;
 import cz.osu.project.service.AddressService;
 import cz.osu.project.service.CompanyService;
 import cz.osu.project.service.ContactService;
@@ -54,10 +53,10 @@ public class CompanyController {
     }
 
     @PostMapping("/company/{id}")
-    public String postCompany(@PathVariable long id,
+    public String postCompany(@PathVariable Long id,
                               @RequestParam(name="name", required=true)String name,
-                              @RequestParam(name="address", required=true)long addressID,
-                              @RequestParam(name="contact", required=true)long contactID,
+                              @RequestParam(name="address", required=true)Long addressID,
+                              @RequestParam(name="contact", required=true)Long contactID,
                               Model model) {
         Company company = companyService.get(id);
         Address address = addressService.get(addressID);
@@ -96,7 +95,7 @@ public class CompanyController {
     }
 
     @GetMapping("/company/{id}/delete")
-    public String deleteProduct(@PathVariable long id, Model model) {
+    public String deleteProduct(@PathVariable Long id, Model model) {
         companyService.delete(id);
 
         return "redirect:/companies";
@@ -104,8 +103,8 @@ public class CompanyController {
 
     @PostMapping("/company/new")
     public String postNewCompany(@RequestParam(name="name", required=true)String name,
-                                 @RequestParam(name="address", required=true)long addressID,
-                                 @RequestParam(name="contact", required=true)long contactID,
+                                 @RequestParam(name="address", required=true) Long addressID,
+                                 @RequestParam(name="contact", required=true) Long contactID,
                                  Model model) {
         List<Address> addresses = addressService.getAll();
         List<Contact> contacts = contactService.getAll();

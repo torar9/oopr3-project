@@ -9,7 +9,7 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="address", nullable=false)
@@ -32,7 +32,7 @@ public class Company {
         this.contact = contact;
     }
 
-    public Company(int id, String name, Address address, Contact contact, Set<Expedition> expeditions) {
+    public Company(Long id, String name, Address address, Contact contact, Set<Expedition> expeditions) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -47,11 +47,11 @@ public class Company {
         this.contact = contact;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

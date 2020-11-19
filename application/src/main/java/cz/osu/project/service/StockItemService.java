@@ -21,7 +21,7 @@ public class StockItemService {
     @Autowired
     ExpeditionService expeditionService;
 
-    public StockItem create(int quantity, Double price, Double weight, long productID, long companyID, long expeditionID) throws Exception {
+    public StockItem create(Integer quantity, Double price, Double weight, Long productID, Long companyID, Long expeditionID) throws Exception {
         if(price == null)
             throw new Exception("Neplatná cena");
         if(weight == null)
@@ -29,8 +29,9 @@ public class StockItemService {
 
         Product product = productService.get(productID);
         Company comp = companyService.get(companyID);
-        Expedition expedition = expeditionService.get(expeditionID);
-//long id, int quantity, Double price, Double weight, LocalDateTime storageDate, Product product, Expedition expedition, Company company
+        Expedition expedition = null;
+        if(expeditionID != null)
+            expedition = expeditionService.get(expeditionID);
         StockItem item = new StockItem(quantity, price, weight, product, comp, expedition);
 
         return stockItemRepo.save(item);
@@ -46,11 +47,11 @@ public class StockItemService {
         stockItemRepo.save(stockItem);
     }
 
-    public StockItem get(long id) {
+    public StockItem get(Long id) {
         return stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id) {
+    public void delete(Long id) {
         StockItem item = stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         stockItemRepo.delete(item);
     }

@@ -23,7 +23,7 @@ public class AddressController {
     }
 
     @GetMapping("/address/{id}")
-    public String getAddress(@PathVariable long id, Model model) {
+    public String getAddress(@PathVariable Long id, Model model) {
         Address address = addressService.get(id);
         model.addAttribute("address", address);
 
@@ -31,7 +31,7 @@ public class AddressController {
     }
 
     @PostMapping("/address/{id}")
-    public String postAddress(@PathVariable long id,
+    public String postAddress(@PathVariable Long id,
                               @RequestParam(name="streetName", required=true)String streetName,
                               @RequestParam(name="buildingNumber", required=true)String buildingNumber,
                               @RequestParam(name="postalCode", required=true)String postalCode,
@@ -60,7 +60,7 @@ public class AddressController {
     }
 
     @GetMapping("/address/{id}/delete")
-    public String deleteAddress(@PathVariable long id, Model model) {
+    public String deleteAddress(@PathVariable Long id, Model model) {
         addressService.delete(id);
 
         return "redirect:/addresses";

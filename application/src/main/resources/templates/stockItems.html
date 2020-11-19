@@ -35,7 +35,7 @@
                     <th th:text="${stockItem.getExpedition() != null} ? ${stockItem.getExpedition().getId()} : 'N/A'"></th>
                     <th th:text="${stockItem.getQuantity()}"></th>
                     <th th:text="${stockItem.getPrice()}"></th>
-                    <th th:text="${stockItem.getStorageDate()}"></th>
+                    <th th:text="${#temporals.format(stockItem.getStorageDate().toLocalDate(), 'dd-MM-yyyy HH:mm')}"></th>
                 </tr>
                 </tbody>
             </table>

@@ -53,18 +53,18 @@ public class StockItemController {
 
     @PostMapping("/stockItem/{id}")
     public String postStockItem(@PathVariable long id,
-                              @RequestParam(name="expedition", required = false) long expeditionID,
-                              @RequestParam(name="suplier", required=false)long suplierID,
-                              @RequestParam(name="product", required=true)long productID,
-                              @RequestParam(name="quantity", required=true)int quantity,
+                              @RequestParam(name="expedition", required=false)Long expeditionID,
+                              @RequestParam(name="suplier", required=true)Long suplierID,
+                              @RequestParam(name="product", required=true)Long productID,
+                              @RequestParam(name="quantity", required=true)Integer quantity,
                               @RequestParam(name="price", required=true)Double price,
                               @RequestParam(name="weight", required=true)Double weight,
-                              @RequestParam(name="storageDate", required=true)LocalDateTime storageDate,
                               Model model) {
         StockItem stockItem = stockItemService.get(id);
         Company suplier = companyService.get(suplierID);
         Product product = productService.get(productID);
-        stockItem.set(null, suplier, product, quantity, price, weight, storageDate);
+        //Expedition expedition = expeditionService.get(expeditionID);
+        stockItem.set(null, suplier, product, quantity, price, weight);
         try {
             stockItemService.save(stockItem);
             model.addAttribute("message", "Upraveno");
@@ -79,6 +79,8 @@ public class StockItemController {
         model.addAttribute("products", products);
         List<Expedition> expeditions = expeditionService.getAll();
         model.addAttribute("expeditions" , expeditions);
+        List<Company> supliers = companyService.getAll();
+        model.addAttribute("supliers" , supliers);
 
         return "stockItem";
     }
@@ -89,6 +91,8 @@ public class StockItemController {
         model.addAttribute("products", products);
         List<Expedition> expeditions = expeditionService.getAll();
         model.addAttribute("expeditions" , expeditions);
+        List<Company> supliers = companyService.getAll();
+        model.addAttribute("supliers" , supliers);
 
         return "stockItem";
     }
@@ -101,13 +105,12 @@ public class StockItemController {
     }
 
     @PostMapping("/stockItem/new")
-    public String postNewStockItem(@RequestParam(name="expedition", required = false) long expeditionID,
-                                 @RequestParam(name="suplier", required=false)long suplierID,
-                                 @RequestParam(name="product", required=true)long productID,
+    public String postNewStockItem(@RequestParam(name="expedition", required=false)Long expeditionID,
+                                 @RequestParam(name="suplier", required=false)Long suplierID,
+                                 @RequestParam(name="product", required=true)Long productID,
                                  @RequestParam(name="quantity", required=true)int quantity,
                                  @RequestParam(name="price", required=true)Double price,
                                  @RequestParam(name="weight", required=true)Double weight,
-                                 @RequestParam(name="storageDate", required=true)LocalDateTime storageDate,
                                  Model model) {
         try {
             StockItem stockItem = stockItemService.create(quantity, price, weight, productID, suplierID, expeditionID);
