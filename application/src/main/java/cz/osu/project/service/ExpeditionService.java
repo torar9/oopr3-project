@@ -18,7 +18,7 @@ public class ExpeditionService {
     @Autowired
     StockItemService stockItemService;
 
-    public Expedition create(Long companyID, String status) {
+    public Expedition create(String status, Long companyID) {
         if (status == null)
             throw new NullPointerException();
 

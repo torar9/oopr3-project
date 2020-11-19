@@ -46,6 +46,15 @@ public class Expedition {
         this.company = company;
     }
 
+    public void set(String status, Company company) {
+        setStatus(status);
+        setCompany(company);
+    }
+
+    public void set(Company company) {
+        setCompany(company);
+    }
+
     public Long getId() {
         return id;
     }
