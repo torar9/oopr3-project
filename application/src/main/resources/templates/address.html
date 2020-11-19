@@ -25,7 +25,7 @@
                 <label class="text-danger" th:text="${error}"></label>
                 <br>
                 <label th:text="${'ID: ' + address.getId()}"></label>
-                <input type="hidden" id="Id" name="id" value="1">
+                <input th:value="${address.getId()}" type="hidden" id="id" name="id">
                 <div class="form-group">
                     <label>Název ulice <label style="color:gray;">*</label></label>
                     <input th:value="${address.getStreetName()}" class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName">

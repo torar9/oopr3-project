@@ -25,7 +25,7 @@
                 <label class="text-danger" th:text="${error}"></label>
                 <br>
                 <label th:text="${'ID: ' + product.getId()}"></label>
-                <input type="hidden" id="Id" name="id" value="1">
+                <input th:value="${product.getId()}" type="hidden" id="id" name="id">
                 <div class="form-group">
                     <label>Název <label style="color:gray;">*</label></label>
                     <input th:value="${product.getName()}" class="form-control" type="text" placeholder="Název..." id="name" name="name">

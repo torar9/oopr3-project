@@ -25,7 +25,7 @@
                 <label class="text-danger" th:text="${error}"></label>
                 <br>
                 <label th:text="${'ID: ' + company.getId()}"></label>
-                <input type="hidden" id="Id" name="id" value="1">
+                <input th:value="${company.getId()}" type="hidden" id="id" name="id">
                 <div class="form-group">
                     <label>Název <label style="color:gray;">*</label></label>
                     <input th:value="${company.getName()}" class="form-control" type="text" placeholder="Název..." id="name" name="name">
@@ -51,7 +51,6 @@
         <div th:if="${company == null}" class="container bg-white p-5 shadow">
             <form method="post">
                 <label class="text-danger" th:text="${error}"></label>
-                <input type="hidden" id="Id" name="id" value="1">
                 <div class="form-group">
                     <label>Název <label style="color:gray;">*</label></label>
                     <input class="form-control" type="text" placeholder="Název..." id="name" name="name">
