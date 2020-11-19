@@ -1,10 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" lang="cs">
+<head th:insert="fragment/htmlHead.html"> </head>
+<body class="general-background">
+<div class="d-flex" id="wrapper">
+    <nav th:insert="fragment/navigation.html"> </nav>
+    <div class="" id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <form action="/stockItems"><button class="btn btn-primary btn-dark" id="new-btn">Zpátky</button></form>
+            <form th:if="${stockItem != null}" th:action="'/stockItem/' + ${stockItem.getId()} + '/delete'"><button class="btn btn-primary btn-warning ml-1" id="delete-btn">Smazat</button></form>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">...<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
+        <h3 class="m-3 text-center">Naskladněný produkt</h3>
+
+        <div th:if="${stockItem != null}" class="container bg-white p-5 shadow">
+            <form method="post">
+                <label th:if="${message != null}" style="color: #1e7e34;" th:text="${message}"></label>
+                <label class="text-danger" th:text="${error}"></label>
+                <br>
+                <label th:text="${'ID: ' + stockItem.getId()}"></label>
+                <input th:value="${stockItem.getId()}" type="hidden" id="id" name="id">
+                <div class="form-group">
+                    <label>Zboží <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="product" name="product">
+                        <option th:selected="${stockItem.getProduct().getId() == product.getId()}" th:value="${product.getId()}" th:text="${product.getName()}" th:each="product: ${products}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ID expedice <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="expedition" name="expedition">
+                        <option th:selected="${stockItem.getExpedition()?.getId() == expedetion.getId()}" th:value="${expedetion.getId()}" th:text="${expedetion.getId()}" th:each="expedetion: ${expeditions}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Počet <label style="color:gray;">*</label></label>
+                    <input th:value="${stockItem.getQuantity()}" class="form-control" type="text" placeholder="Počet..." id="quantity" name="quantity">
+                </div>
+                <div class="form-group">
+                    <label>Cena Kč <label style="color:gray;">*</label></label>
+                    <input th:value="${stockItem.getPrice()}" class="form-control" type="text" placeholder="Cena Kč..." id="price" name="price">
+                </div>
+                <div class="form-group">
+                    <label>Datum naskladnění <label style="color:gray;">*</label></label>
+                    <input th:value="${stockItem.getStorageDate()}" class="form-control" type="date" id="storageDate" name="storageDate">
+                </div>
+                <button type="submit" class="btn btn-primary btn-dark">Upravit</button>
+                <br>
+                <label style="color:gray;" class="mt-5">* povinný údaj</label>
+            </form>
+        </div>
+
+        <div th:if="${stockItem == null}" class="container bg-white p-5 shadow">
+            <form method="post">
+                <label class="text-danger" th:text="${error}"></label>
+                <div class="form-group">
+                    <label>Zboží <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="product" name="product">
+                        <option th:value="${product.getId()}" th:text="${product.getName()}" th:each="product: ${products}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ID expedice <label style="color:gray;">*</label></label>
+                    <select class="custom-select" id="expedition" name="expedition">
+                        <option th:value="${expedetion.getId()}" th:text="${expedetion.getId()}" th:each="expedetion: ${expeditions}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Počet <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="text" placeholder="Počet..." id="quantity" name="quantity">
+                </div>
+                <div class="form-group">
+                    <label>Cena Kč <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="text" placeholder="Cena Kč..." id="price" name="price">
+                </div>
+                <div class="form-group">
+                    <label>Datum naskladnění <label style="color:gray;">*</label></label>
+                    <input class="form-control" type="date" id="storageDate" name="storageDate">
+                </div>
+                <button type="submit" class="btn btn-primary btn-dark">Odeslat</button>
+                <br>
+                <label style="color:gray;" class="mt-5">* povinný údaj</label>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<div th:insert="fragment/footer.html"> </div>
 </body>
 </html>

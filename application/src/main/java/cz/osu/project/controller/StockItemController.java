@@ -1,9 +1,11 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Company;
+import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.entity.StockItem;
 import cz.osu.project.service.CompanyService;
+import cz.osu.project.service.ExpeditionService;
 import cz.osu.project.service.ProductService;
 import cz.osu.project.service.StockItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class StockItemController {
     CompanyService companyService;
     @Autowired
     ProductService productService;
+    @Autowired
+    ExpeditionService expeditionService;
 
     @GetMapping("/stockItems")
     public String getStockItems(Model model) {
@@ -39,6 +43,10 @@ public class StockItemController {
     public String getStockItem(@PathVariable long id, Model model) {
         StockItem stockItem = stockItemService.get(id);
         model.addAttribute("stockItem", stockItem);
+        List<Product> products = productService.getAll();
+        model.addAttribute("products", products);
+        List<Expedition> expeditions = expeditionService.getAll();
+        model.addAttribute("expeditions" , expeditions);
 
         return "stockItem";
     }
@@ -67,12 +75,21 @@ public class StockItemController {
 
         stockItem = stockItemService.get(id);
         model.addAttribute("stockItem", stockItem);
+        List<Product> products = productService.getAll();
+        model.addAttribute("products", products);
+        List<Expedition> expeditions = expeditionService.getAll();
+        model.addAttribute("expeditions" , expeditions);
 
         return "stockItem";
     }
 
     @GetMapping("/stockItem/new")
     public String getNewStockItem(Model model) {
+        List<Product> products = productService.getAll();
+        model.addAttribute("products", products);
+        List<Expedition> expeditions = expeditionService.getAll();
+        model.addAttribute("expeditions" , expeditions);
+
         return "stockItem";
     }
 
