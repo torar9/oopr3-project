@@ -32,8 +32,7 @@ public class UserController {
 
         try {
             User user =userService.create(email, fname, lname, password, passwordAgain);
-            securityService.autoLogin(user.getEmail(), user.getPassword());
-            System.out.println("done");
+            //securityService.autoLogin(user.getEmail(), user.getPassword());
         }
         catch (Exception e){
             model.addAttribute("error", e.getMessage());
