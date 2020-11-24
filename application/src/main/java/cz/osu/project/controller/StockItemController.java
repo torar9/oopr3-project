@@ -45,6 +45,8 @@ public class StockItemController {
         model.addAttribute("products", products);
         List<Expedition> expeditions = expeditionService.getAll();
         model.addAttribute("expeditions" , expeditions);
+        List<Company> supliers = companyService.getAll();
+        model.addAttribute("supliers" , supliers);
 
         return "stockItem";
     }

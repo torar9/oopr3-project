@@ -43,6 +43,12 @@ public class ExpeditionService {
         expoRepo.delete(expedition);
     }
 
+    public void storno(Long id) {
+        Expedition expedition = expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+        expedition.setStatus("Storno");
+        expoRepo.save(expedition);
+    }
+
     public List<Expedition> getAll()
     {
         return expoRepo.findAll();

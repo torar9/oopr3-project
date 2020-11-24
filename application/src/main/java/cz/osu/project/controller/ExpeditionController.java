@@ -71,7 +71,7 @@ public class ExpeditionController {
 
     @GetMapping("/expedition/{id}/storno")
     public String stornoExpedition(@PathVariable Long id, Model model) {
-        expeditionService.delete(id);
+        expeditionService.storno(id);
 
         return "redirect:/expeditions";
     }
