@@ -46,12 +46,10 @@ public class UserController {
 
     @GetMapping("/login")
     public String getLogin(Model model, String error, String logout) {
-        User user = userService.findByEmail("test@test.ru");
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
+            model.addAttribute("error", "Neplatně zadané přihlašovací údaje!");
         if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+            model.addAttribute("message", "Úspěšné odhlášení");
 
         return "login";
     }
