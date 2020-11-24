@@ -37,6 +37,9 @@ public class UserController {
         }
         catch (Exception e){
             model.addAttribute("error", e.getMessage());
+            model.addAttribute("email", email);
+            model.addAttribute("fname", fname);
+            model.addAttribute("lname", lname);
 
             return "register";
         }
