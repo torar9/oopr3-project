@@ -63,8 +63,14 @@ public class StockItemController {
         StockItem stockItem = stockItemService.get(id);
         Company suplier = companyService.get(suplierID);
         Product product = productService.get(productID);
-        //Expedition expedition = expeditionService.get(expeditionID);
-        stockItem.set(null, suplier, product, quantity, price, weight);
+
+        if(expeditionID == null)
+            stockItem.set(null, suplier, product, quantity, price, weight);
+        else {
+            Expedition expedition = expeditionService.get(expeditionID);
+            stockItem.set(expedition, suplier, product, quantity, price, weight);
+        }
+
         try {
             stockItemService.save(stockItem);
             model.addAttribute("message", "Upraveno");
