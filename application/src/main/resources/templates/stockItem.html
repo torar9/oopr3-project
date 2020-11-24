@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label>ID expedice <label style="color:gray;">*</label></label>
                     <select class="custom-select" id="expedition" name="expedition">
-                        <option th:selected="${stockItem.getExpedition() == null}" disabled value> -- Zvolte expedici -- </option>
+                        <option th:selected="${stockItem.getExpedition() == null}" value> -- Zvolte expedici -- </option>
                         <option th:selected="${stockItem.getExpedition()?.getId() == expedetion?.getId()}" th:value="${expedetion.getId()}" th:text="${expedetion.getId()}" th:each="expedetion: ${expeditions}"></option>
                     </select>
                 </div>
@@ -89,6 +89,7 @@
                 <div class="form-group">
                     <label>ID expedice <label style="color:gray;">*</label></label>
                     <select class="custom-select" id="expedition" name="expedition">
+                        <option selected value> -- Zvolte expedici -- </option>
                         <option th:value="${expedetion.getId()}" th:text="${expedetion.getId()}" th:each="expedetion: ${expeditions}"></option>
                     </select>
                 </div>
