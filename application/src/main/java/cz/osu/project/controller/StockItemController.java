@@ -4,6 +4,7 @@ import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.entity.StockItem;
+import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.CompanyService;
 import cz.osu.project.service.ExpeditionService;
 import cz.osu.project.service.ProductService;
@@ -75,8 +76,11 @@ public class StockItemController {
             stockItemService.save(stockItem);
             model.addAttribute("message", "Upraveno");
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         stockItem = stockItemService.get(id);
@@ -122,8 +126,14 @@ public class StockItemController {
             StockItem stockItem = stockItemService.create(quantity, price, weight, productID, suplierID, expeditionID);
             return "redirect:/stockItem/" + stockItem.getId();
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
+            model.addAttribute("quantity", quantity);
+            model.addAttribute("price", price);
+            model.addAttribute("weight", weight);
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         return "stockItem";

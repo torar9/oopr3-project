@@ -1,6 +1,7 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.User;
+import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.SecurityServiceImpl;
 import cz.osu.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.SimpleTimeZone;
 
 @Controller
 public class UserController {
@@ -34,13 +37,16 @@ public class UserController {
             User user =userService.create(email, fname, lname, password, passwordAgain);
             //securityService.autoLogin(user.getEmail(), user.getPassword());
         }
-        catch (Exception e){
+        catch (UserErrorException e){
             model.addAttribute("error", e.getMessage());
             model.addAttribute("email", email);
             model.addAttribute("fname", fname);
             model.addAttribute("lname", lname);
 
             return "register";
+        }
+        catch(Exception e) {
+            System.err.println(e.getMessage());
         }
 
         return "redirect:/login";

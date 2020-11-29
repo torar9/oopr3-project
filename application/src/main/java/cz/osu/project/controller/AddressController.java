@@ -1,6 +1,7 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Address;
+import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,8 +45,11 @@ public class AddressController {
             addressService.save(address);
             model.addAttribute("message", "Upraveno");
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         address = addressService.get(id);
@@ -77,8 +81,16 @@ public class AddressController {
             Address address = addressService.create(streetName, buildingNumber, postalCode, city, state);
             return "redirect:/address/" + address.getId();
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
+            model.addAttribute("streetName", streetName);
+            model.addAttribute("buildingNumber", buildingNumber);
+            model.addAttribute("postalCode", postalCode);
+            model.addAttribute("city", city);
+            model.addAttribute("state", state);
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         return "address";

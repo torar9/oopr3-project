@@ -2,6 +2,7 @@ package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Expedition;
+import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.CompanyService;
 import cz.osu.project.service.ExpeditionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +53,11 @@ public class ExpeditionController {
             expeditionService.save(expedition);
             model.addAttribute("message", "Upraveno");
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         expedition = expeditionService.get(id);
@@ -86,8 +90,11 @@ public class ExpeditionController {
             Expedition expedition = expeditionService.create(status, customerID);
             return "redirect:/expedition/" + expedition.getId();
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         return "expedition";

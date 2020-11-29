@@ -1,6 +1,7 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Product;
+import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,8 +43,11 @@ public class ProductController {
             productService.save(product);
             model.addAttribute("message", "Upraveno");
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         product = productService.get(id);
@@ -73,8 +77,14 @@ public class ProductController {
             Product product = productService.create(name, desc, manufacturer);
             return "redirect:/product/" + product.getId();
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
+            model.addAttribute("name", name);
+            model.addAttribute("desc", desc);
+            model.addAttribute("manufacturer", manufacturer);
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         return "product";

@@ -1,6 +1,7 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Contact;
+import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,8 +43,11 @@ public class ContactController {
             contactService.save(contact);
             model.addAttribute("message", "Upraveno");
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         contact = contactService.get(id);
@@ -73,8 +77,14 @@ public class ContactController {
             Contact contact = contactService.create(email, phone, fax);
             return "redirect:/contact/" + contact.getId();
         }
-        catch (Exception e) {
+        catch (UserErrorException e) {
+            model.addAttribute("email", email);
+            model.addAttribute("phone", phone);
+            model.addAttribute("fax", email);
             model.addAttribute("error", e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 
         return "contact";

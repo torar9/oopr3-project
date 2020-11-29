@@ -1,7 +1,9 @@
 package cz.osu.project.service;
 
+import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.repository.ProductRepository;
+import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,27 +15,16 @@ public class ProductService {
     @Autowired
     ProductRepository productRepo;
 
-    public Product create(String name, String description, String manufacturer) throws Exception {
-        if(name == null || name.isEmpty())
-            throw new Exception("Jméno musí být vyplněno");
-        if(description == null || description.isEmpty())
-            throw new Exception("Popis musí být vyplněn");
-        if(manufacturer == null || manufacturer.isEmpty())
-            throw new Exception("Výrobce musí být vyplněn");
+    public Product create(String name, String description, String manufacturer) throws UserErrorException {
+        checkMandatoryFields(name, description, manufacturer);
 
         Product product = new Product(name, description, manufacturer);
 
         return productRepo.save(product);
     }
 
-    public void save(Product product) throws Exception
-    {
-        if(product.getName() == null || product.getName().isEmpty())
-            throw new Exception("Jméno musí být vyplněno");
-        if(product.getDescription() == null || product.getDescription().isEmpty())
-            throw new Exception("Popis musí být vyplněn");
-        if(product.getManufacturer() == null || product.getManufacturer().isEmpty())
-            throw new Exception("Výrobce musí být vyplněn");
+    public void save(Product product) throws UserErrorException {
+        checkMandatoryFields(product);
 
         productRepo.save(product);
     }
@@ -49,5 +40,18 @@ public class ProductService {
 
     public List<Product> getAll() {
         return productRepo.findAll();
+    }
+
+    private void checkMandatoryFields(String name, String description, String manufacturer) throws UserErrorException {
+        if(name == null || name.isEmpty())
+            throw new UserErrorException("Jméno musí být vyplněno");
+        if(description == null || description.isEmpty())
+            throw new UserErrorException("Popis musí být vyplněn");
+        if(manufacturer == null || manufacturer.isEmpty())
+            throw new UserErrorException("Výrobce musí být vyplněn");
+    }
+
+    private void checkMandatoryFields(Product product) throws UserErrorException {
+        this.checkMandatoryFields(product.getName(), product.getDescription(), product.getManufacturer());
     }
 }
