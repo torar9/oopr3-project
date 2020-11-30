@@ -64,23 +64,23 @@
                 <input type="hidden" id="Id" name="id" value="1">
                 <div class="form-group">
                     <label>Název ulice <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName" required>
+                    <input th:value="${streetName}" class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName" required>
                 </div>
                 <div class="form-group">
                     <label>Číslo popisné <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber" required>
+                    <input th:value="${buildingNumber}" class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber" required>
                 </div>
                 <div class="form-group">
                     <label>PSČ <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode" required>
+                    <input th:value="${postalCode}" class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode" required>
                 </div>
                 <div class="form-group">
                     <label>Město <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="text" placeholder="Město..." id="city" name="city" required>
+                    <input th:value="${city}" class="form-control" type="text" placeholder="Město..." id="city" name="city" required>
                 </div>
                 <div class="form-group">
                     <label>Stát <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="text" placeholder="Stát..." id="state" name="state" required>
+                    <input th:value="${state}" class="form-control" type="text" placeholder="Stát..." id="state" name="state" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Odeslat</button>
                 <br>

@@ -95,15 +95,15 @@
                 </div>
                 <div class="form-group">
                     <label>Počet <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="number" placeholder="Počet..." id="quantity" name="quantity" required>
+                    <input th:value="quantity" class="form-control" type="number" placeholder="Počet..." id="quantity" name="quantity" required>
                 </div>
                 <div class="form-group">
                     <label>Cena Kč <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="number" placeholder="Cena Kč..." id="price" name="price" required>
+                    <input th:value="${price}" class="form-control" type="number" placeholder="Cena Kč..." id="price" name="price" required>
                 </div>
                 <div class="form-group">
                     <label>Váha v gramech <label style="color:gray;">*</label></label>
-                    <input class="form-control" type="number" placeholder="Váha v gramech..." id="weight" name="weight" required>
+                    <input th:value="${weight}" class="form-control" type="number" placeholder="Váha v gramech..." id="weight" name="weight" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Odeslat</button>
                 <br>
