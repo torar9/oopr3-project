@@ -76,3 +76,5 @@ body {
 .my-border {
     border: 1px solid #9C9C9C;
 }
+
+.my-input-search{ width: 500px; height: 40px; margin-left: 8px;}

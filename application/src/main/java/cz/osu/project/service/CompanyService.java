@@ -50,7 +50,7 @@ public class CompanyService {
         return companyRepo.findAll();
     }
 
-    public List<Company> searchCompanyByName(String name) {
+    public List<Company> searchByName(String name) {
         return companyRepo.findByName(name);
     }
 

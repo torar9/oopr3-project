@@ -1,5 +1,6 @@
 package cz.osu.project.controller;
 
+import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.*;
@@ -16,8 +17,9 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/products")
-    public String getProducts(Model model) {
-        List<Product> products = productService.getAll();
+    public String getProducts(@RequestParam(value = "search", required = false) String search, Model model) {
+        List<Product> products = (search == null || search.isEmpty())? productService.getAll() : productService.searchByName(search);
+        model.addAttribute("search", search);
         model.addAttribute("products", products);
 
         return "products";

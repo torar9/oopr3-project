@@ -34,7 +34,7 @@ public class CompanyController {
 
     @GetMapping("/companies")
     public String getCompanies(@RequestParam(value = "search", required = false) String search, Model model) {
-        List<Company> companies = (search == null || search.isEmpty())? companyService.getAll() : companyService.searchCompanyByName(search);
+        List<Company> companies = (search == null || search.isEmpty())? companyService.getAll() : companyService.searchByName(search);
         model.addAttribute("search", search);
         model.addAttribute("companies", companies);
 

@@ -31,8 +31,9 @@ public class StockItemController {
     ExpeditionService expeditionService;
 
     @GetMapping("/stockItems")
-    public String getStockItems(Model model) {
-        List<StockItem> stockItems = stockItemService.getAll();
+    public String getStockItems(@RequestParam(value = "search", required = false) String search, Model model) {
+        List<StockItem> stockItems = (search == null || search.isEmpty())? stockItemService.getAll() : stockItemService.searchByName(search);
+        model.addAttribute("search", search);
         model.addAttribute("stockItems", stockItems);
 
         return "stockItems";

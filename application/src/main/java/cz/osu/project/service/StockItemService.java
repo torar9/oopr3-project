@@ -52,10 +52,13 @@ public class StockItemService {
         return stockItemRepo.findAll();
     }
 
+    public List<StockItem> searchByName(String name) {
+        return stockItemRepo.findByName(name);
+    }
+
     private void checkMandatoryFields(Integer quantity, Double price, Double weight, Long productID, Long companyID) throws UserErrorException {
-        if(quantity == null) {
+        if(quantity == null)
             throw new UserErrorException("Počet kusů musí být vyplněn");
-        }
         else if(quantity <= 0)
             throw new UserErrorException("Neplatně zadaná hodnota počtu kusů. Zadejte kladné číslo");
         if(price == null)

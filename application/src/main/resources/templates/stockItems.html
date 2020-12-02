@@ -9,7 +9,7 @@
             <form action="stockItem/new"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /><button class="btn btn-primary btn-dark" id="new-btn">Vytvořit</button></form>
             <form class="form-inline md-form form-sm mt-0 ml-3" action="stockItems" method="get">
                 <i class="fas fa-search" aria-hidden="true"></i>
-                <input th:value="search" class="form-control form-control-sm ml-3 w-75" type="text" id="search" name="search" placeholder="Vyhledat" aria-label="Search">
+                <input th:value="${search}" class="my-input-search" type="text" id="search" name="search" placeholder="Vyhledat" aria-label="Search">
             </form>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">

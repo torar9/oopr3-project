@@ -2,6 +2,7 @@ package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.entity.Product;
+import cz.osu.project.database.entity.StockItem;
 import cz.osu.project.database.repository.ProductRepository;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,10 @@ public class ProductService {
 
     public List<Product> getAll() {
         return productRepo.findAll();
+    }
+
+    public List<Product> searchByName(String name) {
+        return productRepo.findByName(name);
     }
 
     private void checkMandatoryFields(String name, String description, String manufacturer) throws UserErrorException {
