@@ -50,6 +50,10 @@ public class CompanyService {
         return companyRepo.findAll();
     }
 
+    public List<Company> searchCompanyByName(String name) {
+        return companyRepo.findByName(name);
+    }
+
     private void checkMandatoryFields(String name, Long addressID, Long contactID) throws UserErrorException {
         if(name == null || name.isEmpty())
             throw new UserErrorException("Název společnosti musí být vyplněn");

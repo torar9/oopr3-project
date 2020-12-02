@@ -33,9 +33,10 @@ public class CompanyController {
     }
 
     @GetMapping("/companies")
-    public String getCompanies(Model model) {
-        List<Company> products = companyService.getAll();
-        model.addAttribute("companies", products);
+    public String getCompanies(@RequestParam(value = "search", required = false) String search, Model model) {
+        List<Company> companies = (search == null || search.isEmpty())? companyService.getAll() : companyService.searchCompanyByName(search);
+        model.addAttribute("search", search);
+        model.addAttribute("companies", companies);
 
         return "companies";
     }
