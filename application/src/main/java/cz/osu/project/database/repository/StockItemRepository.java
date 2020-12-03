@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface StockItemRepository extends JpaRepository<StockItem, Long> {
-    @Query("SELECT c FROM Company c WHERE c.name like %?1%")
+    @Query("SELECT s FROM StockItem s WHERE s.product.name like %?1%")
     List<StockItem> findByName(@Param("name") String name);
 }

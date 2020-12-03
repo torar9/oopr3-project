@@ -78,3 +78,7 @@ body {
 }
 
 .my-input-search{ width: 500px; height: 40px; margin-left: 8px;}
+
+.expedition-red{ background: crimson; font-size: 18px;}
+.expedition-green{ background: #1e7e34; font-size: 18px;}
+.expedition-blue{ background: lightskyblue; font-size: 18px;}

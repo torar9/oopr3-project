@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,8 +24,16 @@ public class ExpeditionController {
     CompanyService companyService;
 
     @GetMapping("/expeditions")
-    public String getExpeditions(Model model) {
-        List<Expedition> expeditions = expeditionService.getAll();
+    public String getExpeditions(@RequestParam(value = "search", required = false) Long search, Model model) {
+        List<Expedition> expeditions;
+        if(search == null){
+            expeditions = expeditionService.getAll();
+        }
+        else {
+            System.out.println("search: " + search);
+            expeditions = expeditionService.searchByID(search);
+        }
+        model.addAttribute("search", search);
         model.addAttribute("expeditions", expeditions);
 
         return "expeditions";

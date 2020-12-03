@@ -1,7 +1,6 @@
 package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Company;
-import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.database.repository.ExpeditionRepository;
 import cz.osu.project.exception.UserErrorException;
@@ -54,6 +53,10 @@ public class ExpeditionService {
     public List<Expedition> getAll()
     {
         return expoRepo.findAll();
+    }
+
+    public List<Expedition> searchByID(Long id) {
+        return expoRepo.findByID(id);
     }
 
     private void checkMandatoryFields(String status, Long companyID) throws UserErrorException {
