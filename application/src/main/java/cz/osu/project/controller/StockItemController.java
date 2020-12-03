@@ -31,8 +31,17 @@ public class StockItemController {
     ExpeditionService expeditionService;
 
     @GetMapping("/stockItems")
-    public String getStockItems(@RequestParam(value = "search", required = false) String search, Model model) {
-        List<StockItem> stockItems = (search == null || search.isEmpty())? stockItemService.getAll() : stockItemService.searchByName(search);
+    public String getStockItems(@RequestParam(value = "search", required = false) String search,
+                                @RequestParam(value = "choice", required = false, defaultValue = "1") String choice,  Model model) {
+        List<StockItem> stockItems;
+        if(search == null || search.isEmpty()) {
+            if(choice.equals("1"))
+                stockItems = stockItemService.getFreeItems();
+            else stockItems = stockItemService.getAll();
+        }
+        else {
+            stockItems = stockItemService.searchByName(search);
+        }
         model.addAttribute("search", search);
         model.addAttribute("stockItems", stockItems);
 
