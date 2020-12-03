@@ -84,3 +84,5 @@ body {
 .expedition-red{ background: crimson; font-size: 18px;}
 .expedition-green{ background: #1e7e34; font-size: 18px;}
 .expedition-blue{ background: #17a2b8; font-size: 18px;}
+
+.my-nav-active {color: #343a40; background: #9C9C9C;}
