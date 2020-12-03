@@ -13,4 +13,10 @@ import java.util.List;
 public interface ExpeditionRepository extends JpaRepository<Expedition, Long> {
     @Query("SELECT e FROM Expedition e WHERE e.id = ?1")
     List<Expedition> findByID(@Param("id") Long id);
+
+    @Query("SELECT e FROM Expedition e WHERE e.status LIKE ?1")
+    List<Expedition> getExpeditionsAccordingToStatus(@Param("status") String status);
+
+    @Query("SELECT e FROM Expedition e WHERE e.company.id = ?1")
+    List<Expedition> getCompanyExpeditions(@Param("company") Long company);
 }

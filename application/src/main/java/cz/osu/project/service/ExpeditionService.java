@@ -50,13 +50,31 @@ public class ExpeditionService {
         expoRepo.save(expedition);
     }
 
+    public void complete(Long id) {
+        Expedition expedition = expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+        expedition.setStatus("Dokončeno");
+        expoRepo.save(expedition);
+    }
+
     public List<Expedition> getAll()
     {
         return expoRepo.findAll();
     }
 
+    public List<Expedition> getExpeditionsAccordingToStatus(String status) {
+        return expoRepo.getExpeditionsAccordingToStatus(status);
+    }
+
     public List<Expedition> searchByID(Long id) {
         return expoRepo.findByID(id);
+    }
+
+    public List<Expedition> getCompanyExpeditions(Long companyID) {
+        return expoRepo.getCompanyExpeditions(companyID);
+    }
+
+    public List<Expedition> getCompanyExpeditions(Company company) {
+        return this.getCompanyExpeditions(company.getId());
     }
 
     private void checkMandatoryFields(String status, Long companyID) throws UserErrorException {

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,17 +23,21 @@ public class ExpeditionController {
     CompanyService companyService;
 
     @GetMapping("/expeditions")
-    public String getExpeditions(@RequestParam(value = "search", required = false) Long search, Model model) {
+    public String getExpeditions(@RequestParam(value = "search", required = false) Long search,
+                                @RequestParam(value = "choice", required = false, defaultValue = "1") String choice,  Model model) {
         List<Expedition> expeditions;
-        if(search == null){
-            expeditions = expeditionService.getAll();
+        if(search == null) {
+            if(choice.equals("1"))
+                expeditions = expeditionService.getExpeditionsAccordingToStatus("Storno");
+            else if(choice.equals("2")) expeditions = expeditionService.getExpeditionsAccordingToStatus("Vytvořeno");
+                else expeditions = expeditionService.getExpeditionsAccordingToStatus("Dokončeno");
         }
         else {
-            System.out.println("search: " + search);
             expeditions = expeditionService.searchByID(search);
         }
         model.addAttribute("search", search);
         model.addAttribute("expeditions", expeditions);
+        model.addAttribute("choice", choice);
 
         return "expeditions";
     }
@@ -86,7 +89,14 @@ public class ExpeditionController {
     public String stornoExpedition(@PathVariable Long id, Model model) {
         expeditionService.storno(id);
 
-        return "redirect:/expeditions";
+        return "redirect:/expedition/" + id;
+    }
+
+    @GetMapping("/expedition/{id}/complete")
+    public String completeExpedition(@PathVariable Long id, Model model) {
+        expeditionService.complete(id);
+
+        return "redirect:/expedition/" + id;
     }
 
     @PostMapping("/expedition/new")

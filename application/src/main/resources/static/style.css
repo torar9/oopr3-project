@@ -85,4 +85,16 @@ body {
 .expedition-green{ background: #1e7e34; font-size: 18px;}
 .expedition-blue{ background: #17a2b8; font-size: 18px;}
 
+.expedition-button-red{ background: crimson; color: white;}
+.expedition-button-green{ background: #1e7e34; color: white;}
+.expedition-button-blue{ background: #17a2b8; color: white;}
+.expedition-button-red:hover{ background: darkred;}
+.expedition-button-green:hover{background: darkgreen;}
+.expedition-button-blue:hover{background: darkcyan;}
+.expedition-button-red:active{ background: red;}
+.expedition-button-green:active{background: green;}
+.expedition-button-blue:active{background: aqua;}
+
+
 .my-nav-active {color: #343a40; background: #9C9C9C;}
+.my-header{font-size: 22px; text-align: center;}

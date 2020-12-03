@@ -3,10 +3,12 @@ package cz.osu.project.controller;
 import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Contact;
+import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.AddressService;
 import cz.osu.project.service.CompanyService;
 import cz.osu.project.service.ContactService;
+import cz.osu.project.service.ExpeditionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,8 @@ public class CompanyController {
     AddressService addressService;
     @Autowired
     ContactService contactService;
+    @Autowired
+    ExpeditionService expeditionService;
 
     @GetMapping("/")
     public String getRoot()
@@ -42,14 +46,16 @@ public class CompanyController {
     }
 
     @GetMapping("/company/{id}")
-    public String getCompany(@PathVariable long id, Model model) {
+    public String getCompany(@PathVariable Long id, Model model) {
         Company company = companyService.get(id);
         List<Address> addresses = addressService.getAll();
         List<Contact> contacts = contactService.getAll();
+        List<Expedition> expeditions = expeditionService.getCompanyExpeditions(company);
 
         model.addAttribute("company", company);
         model.addAttribute("addresses", addresses);
         model.addAttribute("contacts", contacts);
+        model.addAttribute("expeditions", expeditions);
 
         return "company";
     }
@@ -84,6 +90,8 @@ public class CompanyController {
 
         company = companyService.get(id);
         model.addAttribute("company", company);
+        List<Expedition> expeditions = expeditionService.getCompanyExpeditions(company);
+        model.addAttribute("expeditions", expeditions);
 
         return "company";
     }
