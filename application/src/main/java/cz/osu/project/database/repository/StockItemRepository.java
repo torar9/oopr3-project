@@ -15,4 +15,7 @@ public interface StockItemRepository extends JpaRepository<StockItem, Long> {
 
     @Query("SELECT s FROM StockItem s WHERE s.expedition IS NULL")
     List<StockItem> getFreeItems();
+
+    @Query("SELECT s FROM StockItem s WHERE s.expedition IS NOT NULL")
+    List<StockItem> getReservedItems();
 }

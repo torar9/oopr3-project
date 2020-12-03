@@ -56,6 +56,10 @@ public class StockItemService {
         return stockItemRepo.getFreeItems();
     }
 
+    public List<StockItem> getReservedItems() {
+        return stockItemRepo.getReservedItems();
+    }
+
     public List<StockItem> searchByName(String name) {
         return stockItemRepo.findByName(name);
     }

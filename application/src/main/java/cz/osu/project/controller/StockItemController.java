@@ -37,13 +37,14 @@ public class StockItemController {
         if(search == null || search.isEmpty()) {
             if(choice.equals("1"))
                 stockItems = stockItemService.getFreeItems();
-            else stockItems = stockItemService.getAll();
+            else stockItems = stockItemService.getReservedItems();
         }
         else {
             stockItems = stockItemService.searchByName(search);
         }
         model.addAttribute("search", search);
         model.addAttribute("stockItems", stockItems);
+        model.addAttribute("choice", choice);
 
         return "stockItems";
     }
