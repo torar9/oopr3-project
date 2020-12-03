@@ -2,6 +2,7 @@ package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Expedition;
+import cz.osu.project.database.entity.StockItem;
 import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.CompanyService;
 import cz.osu.project.service.ExpeditionService;
@@ -48,6 +49,8 @@ public class ExpeditionController {
         model.addAttribute("expedition", expedition);
         List<Company> customers = companyService.getAll();
         model.addAttribute("customers", customers);
+        List<StockItem> expItems = expeditionService.getItemsInExpedition(expedition);
+        model.addAttribute("stockItems", expItems);
 
         return "expedition";
     }
@@ -71,7 +74,8 @@ public class ExpeditionController {
         catch (Exception e) {
             System.err.println(e.getMessage());
         }
-
+        List<StockItem> expItems = expeditionService.getItemsInExpedition(expedition);
+        model.addAttribute("stockItems", expItems);
         expedition = expeditionService.get(id);
         model.addAttribute("expedition", expedition);
 

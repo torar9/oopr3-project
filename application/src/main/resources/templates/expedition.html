@@ -49,6 +49,30 @@
                     <br>
                     <label style="color:gray;" class="mt-5">* povinný údaj</label>
                 </form>
+                <br>
+                <hr>
+                <br>
+                <p class="my-header"><b>Zboží v expedici</b></p>
+                <table class="table table-striped table-bordered">
+                    <tr class="text-center">
+                        <th class="table-head" scope="col">ID</th>
+                        <th class="table-head" scope="col">Typ zboží</th>
+                        <th class="table-head" scope="col">ID expedice</th>
+                        <th class="table-head" scope="col">Počet</th>
+                        <th class="table-head" scope="col">Cena Kč</th>
+                        <th class="table-head" scope="col">Datum naskladnění</th>
+                    </tr>
+                    <tbody>
+                    <tr class='clickable-row' th:attr="data-href='/stockItem/' + ${stockItem.getId()}"  th:each="stockItem: ${stockItems}">
+                        <th th:text="${stockItem.getId()}" scope="row"></th>
+                        <th th:text="${stockItem.getProduct().getName()}"></th>
+                        <th th:text="${stockItem.getExpedition() != null} ? ${stockItem.getExpedition().getId()} : 'N/A'"></th>
+                        <th th:text="${stockItem.getQuantity()}"></th>
+                        <th th:text="${stockItem.getPrice()}"></th>
+                        <th th:text="${#temporals.format(stockItem.getStorageDate().toLocalDate(), 'dd-MM-yyyy HH:mm')}"></th>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 

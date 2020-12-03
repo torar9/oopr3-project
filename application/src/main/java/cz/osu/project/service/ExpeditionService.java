@@ -2,6 +2,7 @@ package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Expedition;
+import cz.osu.project.database.entity.StockItem;
 import cz.osu.project.database.repository.ExpeditionRepository;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,14 @@ public class ExpeditionService {
 
     public List<Expedition> getCompanyExpeditions(Company company) {
         return this.getCompanyExpeditions(company.getId());
+    }
+
+    public List<StockItem> getItemsInExpedition(Long expeditionID) {
+        return expoRepo.getItemsInExpedition(expeditionID);
+    }
+
+    public List<StockItem> getItemsInExpedition(Expedition expedition) {
+        return this.getItemsInExpedition(expedition.getId());
     }
 
     private void checkMandatoryFields(String status, Long companyID) throws UserErrorException {
