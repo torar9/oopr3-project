@@ -1,11 +1,11 @@
 <div class="bg-light border-right" id="sidebar-wrapper" xmlns:th="http://www.thymeleaf.org">
     <div class="sidebar-heading bg-dark text-white border-bottom">Správa skladu</div>
     <div class="list-group list-group-flush">
-        <a href="/products" th:class="${(#request.requestURI.contains('/products') || #request.requestURI.contains('/product'))? 'list-group-item bg-info text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Produkty</a>
-        <a href="/stockItems" th:class="${(#request.requestURI.contains('/stockItems') || #request.requestURI.contains('/stockItem'))? 'list-group-item bg-info text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Zásoby</a>
-        <a href="/expeditions" th:class="${(#request.requestURI.contains('/expeditions') || #request.requestURI.contains('/expedition'))? 'list-group-item bg-info text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Expedice</a>
-        <a href="/companies" th:class="${(#request.requestURI.contains('/companies') || #request.requestURI.contains('/company'))? 'list-group-item bg-info text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Společnosti</a>
-        <a href="/addresses" th:class="${(#request.requestURI.contains('/addresses') || #request.requestURI.contains('/address'))? 'list-group-item bg-info text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Adresy</a>
-        <a href="/contacts" th:class="${(#request.requestURI.contains('/contacts') || #request.requestURI.contains('/contact'))? 'list-group-item bg-info text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Kontakty</a>
+        <a href="/products" th:class="${(#request.requestURI.contains('/products') || #request.requestURI.contains('/product'))? 'list-group-item bg-secondary text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Produkty</a>
+        <a href="/stockItems" th:class="${(#request.requestURI.contains('/stockItems') || #request.requestURI.contains('/stockItem'))? 'list-group-item bg-secondary text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Zásoby</a>
+        <a href="/expeditions" th:class="${(#request.requestURI.contains('/expeditions') || #request.requestURI.contains('/expedition'))? 'list-group-item bg-secondary text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Expedice</a>
+        <a href="/companies" th:class="${(#request.requestURI.contains('/companies') || #request.requestURI.contains('/company'))? 'list-group-item bg-secondary text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Společnosti</a>
+        <a href="/addresses" th:class="${(#request.requestURI.contains('/addresses') || #request.requestURI.contains('/address'))? 'list-group-item bg-secondarytext-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Adresy</a>
+        <a href="/contacts" th:class="${(#request.requestURI.contains('/contacts') || #request.requestURI.contains('/contact'))? 'list-group-item bg-secondary text-white list-group-item-action' : 'list-group-item list-group-item-action bg-light'}">Kontakty</a>
     </div>
 </div>

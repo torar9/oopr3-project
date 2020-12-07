@@ -23,4 +23,7 @@ public interface ExpeditionRepository extends JpaRepository<Expedition, Long> {
 
     @Query("SELECT e.stockItems FROM Expedition e WHERE e.id = ?1")
     List<StockItem> getItemsInExpedition(@Param("expedition") Long expedition);
+
+    @Query("SELECT e FROM Expedition e WHERE e.status LIKE 'Vytvořeno'")
+    List<Expedition> getOngoinExpeditions();
 }

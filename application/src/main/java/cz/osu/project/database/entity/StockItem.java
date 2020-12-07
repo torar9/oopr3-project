@@ -15,6 +15,7 @@ public class StockItem {
     private Integer quantity;
     private Double price;
     private Double weight;
+    private Boolean blocked = Boolean.FALSE;
     @CreationTimestamp
     private LocalDateTime storageDate;
 
@@ -61,6 +62,14 @@ public class StockItem {
         setQuantity(quantity);
         setPrice(price);
         setWeight(weight);
+    }
+
+    public Boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
     }
 
     public Double getWeight() {
@@ -133,11 +142,9 @@ public class StockItem {
                 "id=" + id +
                 ", quantity=" + quantity +
                 ", price=" + price +
-                ", storageDate=" + storageDate +
-                ", product=" + product +
-                ", expedition=" + expedition +
-                ", company=" + company +
                 ", weight=" + weight +
+                ", blocked=" + blocked +
+                ", storageDate=" + storageDate +
                 '}';
     }
 }

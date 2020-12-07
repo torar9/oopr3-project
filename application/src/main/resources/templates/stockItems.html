@@ -47,7 +47,10 @@
                 <tr class='clickable-row' th:attr="data-href='/stockItem/' + ${stockItem.getId()}"  th:each="stockItem: ${stockItems}">
                     <th th:text="${stockItem.getId()}" scope="row"></th>
                     <th th:text="${stockItem.getProduct().getName()}"></th>
-                    <th th:text="${stockItem.getExpedition() != null} ? ${stockItem.getExpedition().getId()} : 'N/A'"></th>
+                    <th th:text="${stockItem.getExpedition() != null} ? ${stockItem.getExpedition().getId()} : 'N/A'" th:if="${stockItem.getExpedition() == null}" class=""></th>
+                    <th th:text="${stockItem.getExpedition() != null} ? ${stockItem.getExpedition().getId() + ' - ' + stockItem.getExpedition().getStatus()} : 'N/A'" th:if="${stockItem.getExpedition() != null && stockItem.getExpedition().getStatus().equals('Storno')}" class="expedition-red"></th>
+                    <th th:text="${stockItem.getExpedition() != null} ? ${stockItem.getExpedition().getId() + ' - ' + stockItem.getExpedition().getStatus()} : 'N/A'" th:if="${stockItem.getExpedition() != null && stockItem.getExpedition().getStatus().equals('Vytvořeno')}" class="expedition-blue"></th>
+                    <th th:text="${stockItem.getExpedition() != null} ? ${stockItem.getExpedition().getId() + ' - ' + stockItem.getExpedition().getStatus()} : 'N/A'" th:if="${stockItem.getExpedition() != null && stockItem.getExpedition().getStatus().equals('Dokončeno')}" class="expedition-green"></th>
                     <th th:text="${stockItem.getQuantity()}"></th>
                     <th th:text="${stockItem.getPrice()}"></th>
                     <th th:text="${#temporals.format(stockItem.getStorageDate().toLocalDate(), 'dd-MM-yyyy HH:mm')}"></th>

@@ -55,7 +55,7 @@ public class StockItemController {
         model.addAttribute("stockItem", stockItem);
         List<Product> products = productService.getAll();
         model.addAttribute("products", products);
-        List<Expedition> expeditions = expeditionService.getAll();
+        List<Expedition> expeditions = expeditionService.getOngoinExpeditions();
         model.addAttribute("expeditions" , expeditions);
         List<Company> supliers = companyService.getAll();
         model.addAttribute("supliers" , supliers);
@@ -110,7 +110,7 @@ public class StockItemController {
     public String getNewStockItem(Model model) {
         List<Product> products = productService.getAll();
         model.addAttribute("products", products);
-        List<Expedition> expeditions = expeditionService.getAll();
+        List<Expedition> expeditions = expeditionService.getOngoinExpeditions();
         model.addAttribute("expeditions" , expeditions);
         List<Company> supliers = companyService.getAll();
         model.addAttribute("supliers" , supliers);

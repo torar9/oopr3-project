@@ -7,7 +7,7 @@
     <div class="" id="page-content-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <form action="/stockItems"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /><button class="btn btn-primary btn-dark" id="new-btn">Zpátky</button></form>
-            <form th:if="${stockItem != null}" th:action="'/stockItem/' + ${stockItem.getId()} + '/delete'"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /><button class="btn btn-primary btn-warning ml-1" id="delete-btn">Smazat</button></form>
+            <form th:if="${stockItem != null && !stockItem.isBlocked()}" th:action="'/stockItem/' + ${stockItem.getId()} + '/delete'"><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /><button class="btn btn-primary btn-warning ml-1" id="delete-btn">Smazat</button></form>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
@@ -29,42 +29,42 @@
                 <label class="text-danger" th:text="${error}"></label>
                 <br>
                 <label th:text="${'ID: ' + stockItem.getId()}"></label>
-                <input th:value="${stockItem.getId()}" type="hidden" id="id" name="id">
+                <input th:disabled="${stockItem?.isBlocked()}" th:value="${stockItem.getId()}" type="hidden" id="id" name="id">
                 <br>
                 <label th:text="${'Datum naskladnění: ' + #temporals.format(stockItem.getStorageDate(), 'dd-MM-yyyy HH:mm')}"></label>
                 <div class="form-group">
                     <label>Zboží <label style="color:gray;">*</label></label>
-                    <select class="custom-select" id="product" name="product">
+                    <select th:disabled="${stockItem?.isBlocked()}" class="custom-select" id="product" name="product">
                         <option th:selected="${stockItem.getProduct().getId() == product.getId()}" th:value="${product.getId()}" th:text="${product.getName()}" th:each="product: ${products}"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Zásobovatel <label style="color:gray;">*</label></label>
-                    <select class="custom-select" id="suplier" name="suplier">
+                    <select th:disabled="${stockItem?.isBlocked()}" class="custom-select" id="suplier" name="suplier">
                         <option th:selected="${stockItem.getCompany() == null}" disabled value> -- Zvolte zásobovatele -- </option>
                         <option th:selected="${stockItem?.getCompany() == suplier?.getId()}" th:value="${suplier.getId()}" th:text="${suplier.getName()}" th:each="suplier: ${supliers}"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>ID expedice <label style="color:gray;">*</label></label>
-                    <select class="custom-select" id="expedition" name="expedition">
+                    <select th:disabled="${stockItem?.isBlocked()}" class="custom-select" id="expedition" name="expedition">
                         <option th:selected="${stockItem.getExpedition() == null}" value> -- Zvolte expedici -- </option>
                         <option th:selected="${stockItem.getExpedition()?.getId() == expedetion?.getId()}" th:value="${expedetion.getId()}" th:text="${expedetion.getId()}" th:each="expedetion: ${expeditions}"></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Počet <label style="color:gray;">*</label></label>
-                    <input th:value="${stockItem.getQuantity()}" class="form-control" type="number" placeholder="Počet..." id="quantity" name="quantity" required>
+                    <input th:disabled="${stockItem?.isBlocked()}" th:value="${stockItem.getQuantity()}" class="form-control" type="number" placeholder="Počet..." id="quantity" name="quantity" required>
                 </div>
                 <div class="form-group">
                     <label>Cena Kč <label style="color:gray;">*</label></label>
-                    <input th:value="${stockItem.getPrice()}" class="form-control" type="number" placeholder="Cena Kč..." id="price" name="price" required>
+                    <input th:disabled="${stockItem?.isBlocked()}" th:value="${stockItem.getPrice()}" class="form-control" type="number" placeholder="Cena Kč..." id="price" name="price" required>
                 </div>
                 <div class="form-group">
                     <label>Váha v gramech <label style="color:gray;">*</label></label>
-                    <input th:value="${stockItem.getWeight()}" class="form-control" type="number" placeholder="Váha v gramech..." id="weight" name="weight" required>
+                    <input th:disabled="${stockItem?.isBlocked()}" th:value="${stockItem.getWeight()}" class="form-control" type="number" placeholder="Váha v gramech..." id="weight" name="weight" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-dark">Upravit</button>
+                <button th:if="${!stockItem.isBlocked()}" type="submit" class="btn btn-primary btn-dark">Upravit</button>
                 <br>
                 <label style="color:gray;" class="mt-5">* povinný údaj</label>
             </form>

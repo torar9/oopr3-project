@@ -24,9 +24,9 @@
         <h3 class="m-3 text-center">Expedice</h3>
 
         <div th:if="${expedition != null}" class="container bg-white p-0 shadow">
-            <p th:if="${expedition.getStatus().equals('Storno')}" class="flex-box p-3 text-center expedition-red text-white"><b>Stornováno</b></p>
-            <p th:if="${expedition.getStatus().equals('Vytvořeno')}" class="flex-box p-3 text-center expedition-blue text-white"><b>V průběhu</b></p>
-            <p th:if="${expedition.getStatus().equals('Dokončeno')}" class="flex-box p-3 text-center expedition-green text-white"><b>Dokončeno</b></p>
+            <p th:if="${expedition.getStatus().equals('Storno')}" class="flex-box p-3 text-center expedition-red text-dark"><b>Stornováno</b></p>
+            <p th:if="${expedition.getStatus().equals('Vytvořeno')}" class="flex-box p-3 text-center expedition-blue text-dark"><b>V průběhu</b></p>
+            <p th:if="${expedition.getStatus().equals('Dokončeno')}" class="flex-box p-3 text-center expedition-green text-dark"><b>Dokončeno</b></p>
             <div class="container p-5">
                 <form method="post">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

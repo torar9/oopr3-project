@@ -81,9 +81,9 @@ body {
 .my-search-icon {margin: 5px; margin-right: 8px;}
 .my-input-search{ width: 500px; height: 40px; margin-right: 8px;}
 
-.expedition-red{ background: crimson; font-size: 18px;}
-.expedition-green{ background: #1e7e34; font-size: 18px;}
-.expedition-blue{ background: #17a2b8; font-size: 18px;}
+.expedition-red{ background: #ff6666; font-size: 18px;}
+.expedition-green{ background: #78ff75; font-size: 18px;}
+.expedition-blue{ background: #adebff; font-size: 18px;}
 
 .expedition-button-red{ background: crimson; color: white;}
 .expedition-button-green{ background: #1e7e34; color: white;}
@@ -96,5 +96,5 @@ body {
 .expedition-button-blue:active{background: aqua;}
 
 
-.my-nav-active {color: #343a40; background: #9C9C9C;}
+.my-nav-active {color: #343a40; background: red;}
 .my-header{font-size: 22px; text-align: center;}

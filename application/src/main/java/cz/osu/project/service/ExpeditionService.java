@@ -78,6 +78,10 @@ public class ExpeditionService {
         return this.getCompanyExpeditions(company.getId());
     }
 
+    public List<Expedition> getOngoinExpeditions() {
+        return expoRepo.getOngoinExpeditions();
+    }
+
     public List<StockItem> getItemsInExpedition(Long expeditionID) {
         return expoRepo.getItemsInExpedition(expeditionID);
     }
