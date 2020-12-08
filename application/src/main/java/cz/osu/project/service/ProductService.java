@@ -1,8 +1,6 @@
 package cz.osu.project.service;
 
-import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.entity.Product;
-import cz.osu.project.database.entity.StockItem;
 import cz.osu.project.database.repository.ProductRepository;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
 package cz.osu.project.service;
 
-import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.repository.ContactRepository;
 import cz.osu.project.exception.UserErrorException;

@@ -1,7 +1,6 @@
 package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Address;
-import cz.osu.project.database.entity.User;
 import cz.osu.project.database.repository.AddressRepository;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
