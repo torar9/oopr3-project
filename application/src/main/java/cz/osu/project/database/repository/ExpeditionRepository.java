@@ -3,10 +3,12 @@ package cz.osu.project.database.repository;
 import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.database.entity.StockItem;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -26,4 +28,14 @@ public interface ExpeditionRepository extends JpaRepository<Expedition, Long> {
 
     @Query("SELECT e FROM Expedition e WHERE e.status LIKE 'Vytvořeno'")
     List<Expedition> getOngoinExpeditions();
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE StockItem e set e.blocked = 1 where e.expedition.id = ?1")
+    void blockItemsInExpedition(@Param("expedition") Long expedition);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE StockItem e set e.expedition = NULL where e.expedition.id = ?1")
+    void freeItemsInExpedition(@Param("expedition") Long expedition);
 }

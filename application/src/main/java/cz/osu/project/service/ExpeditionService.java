@@ -48,12 +48,14 @@ public class ExpeditionService {
     public void storno(Long id) {
         Expedition expedition = expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         expedition.setStatus("Storno");
+        expoRepo.freeItemsInExpedition(id);
         expoRepo.save(expedition);
     }
 
     public void complete(Long id) {
         Expedition expedition = expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
         expedition.setStatus("Dokončeno");
+        expoRepo.blockItemsInExpedition(id);
         expoRepo.save(expedition);
     }
 
