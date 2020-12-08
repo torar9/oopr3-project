@@ -1,6 +1,5 @@
 package cz.osu.project.service;
 
-import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.entity.User;
 import cz.osu.project.database.repository.RoleRepository;
 import cz.osu.project.database.repository.UserRepository;
@@ -22,6 +21,9 @@ public class UserService {
 
     public User create(String email, String lname, String fname, String password, String passwordAgain) throws UserErrorException {
         checkMandatoryFields(email, lname, fname, password);
+        if(userRepository.findByEmail(email) != null)
+            throw new UserErrorException("Email je již zaregistrován");
+
         if(!password.equals(passwordAgain))
             throw new UserErrorException("Hesla se neshodují");
 
@@ -29,6 +31,22 @@ public class UserService {
         user.setRoles(new HashSet<>(roleRepository.findAll()));
 
         return userRepository.save(user);
+    }
+
+    public User save(User user) throws UserErrorException {
+        checkMandatoryFields(user);
+
+        return userRepository.save(user);
+    }
+
+    public void changePassword(User user, String currentPassword, String newPassword, String passwordAgain) throws UserErrorException {
+        if(!bCryptPasswordEncoder.matches(currentPassword, user.getPassword()))
+            throw new UserErrorException("Neplatné údaje 1");
+        if(!newPassword.equals(passwordAgain) || newPassword.isEmpty() || passwordAgain.isEmpty())
+            throw new UserErrorException("Neplatné údaje 2");
+
+        user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 
     public User findByEmail(String email) {
@@ -44,8 +62,6 @@ public class UserService {
             throw new UserErrorException("Příjmení musí být vyplněno");
         if(password == null || password.isEmpty())
             throw new UserErrorException("Heslo musí být vyplněno");
-        if(userRepository.findByEmail(email) != null)
-            throw new UserErrorException("Email je již zaregistrován");
     }
 
     private void checkMandatoryFields(User user) throws UserErrorException {
