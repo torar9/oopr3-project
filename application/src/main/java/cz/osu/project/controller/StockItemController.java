@@ -55,8 +55,13 @@ public class StockItemController {
         model.addAttribute("stockItem", stockItem);
         List<Product> products = productService.getAll();
         model.addAttribute("products", products);
-        List<Expedition> expeditions = expeditionService.getOngoinExpeditions();
+
+        List<Expedition> expeditions;
+        if(stockItem.getExpedition() == null || stockItem.getExpedition().getStatus().equals("Vytvořeno"))
+            expeditions = expeditionService.getOngoinExpeditions();
+        else expeditions = expeditionService.getAll();
         model.addAttribute("expeditions" , expeditions);
+
         List<Company> supliers = companyService.getAll();
         model.addAttribute("supliers" , supliers);
 
