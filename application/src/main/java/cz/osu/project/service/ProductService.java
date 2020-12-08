@@ -32,8 +32,10 @@ public class ProductService {
         return productRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws UserErrorException {
         Product product = productRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+        if(product.getStockItems().size() > 0)
+            throw new UserErrorException("Produkt je používán");
         productRepo.delete(product);
     }
 

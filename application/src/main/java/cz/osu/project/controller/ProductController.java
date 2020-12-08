@@ -65,7 +65,17 @@ public class ProductController {
 
     @GetMapping("/product/{id}/delete")
     public String deleteProduct(@PathVariable Long id, Model model) {
-        productService.delete(id);
+        try {
+            productService.delete(id);
+        }
+        catch (UserErrorException e) {
+            model.addAttribute("product", productService.get(id));
+            model.addAttribute("error", e.getMessage());
+            return "product";
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
         return "redirect:/products";
     }

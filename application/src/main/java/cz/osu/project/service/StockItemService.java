@@ -43,8 +43,10 @@ public class StockItemService {
         return stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws UserErrorException {
         StockItem item = stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+        if(item.isBlocked())
+            throw new UserErrorException("Položku nelze odstranit");
         stockItemRepo.delete(item);
     }
 

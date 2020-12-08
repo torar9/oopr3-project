@@ -1,6 +1,7 @@
 package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Contact;
+import cz.osu.project.database.entity.User;
 import cz.osu.project.database.repository.ContactRepository;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,12 @@ public class ContactService {
         return contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws UserErrorException {
         Contact contact = contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+
+        if(contact.getCompanies().size() > 0)
+            throw new UserErrorException("Kontakt je používán");
+
         contactRepo.delete(contact);
     }
 

@@ -21,8 +21,7 @@ public class AddressService {
         return addressRepo.save(address);
     }
 
-    public void save(Address address) throws UserErrorException
-    {
+    public void save(Address address) throws UserErrorException {
         checkMandatoryFields(address);
         addressRepo.save(address);
     }
@@ -31,9 +30,10 @@ public class AddressService {
         return addressRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id)
-    {
+    public void delete(long id) throws UserErrorException {
         Address address = addressRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+        if(address.getAddresses().size() > 0)
+            throw new UserErrorException("Adresa je používána");
         addressRepo.delete(address);
     }
 

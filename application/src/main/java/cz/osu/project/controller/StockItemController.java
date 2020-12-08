@@ -125,7 +125,17 @@ public class StockItemController {
 
     @GetMapping("/stockItem/{id}/delete")
     public String deleteStockItem(@PathVariable long id, Model model) {
-        stockItemService.delete(id);
+        try {
+            stockItemService.delete(id);
+        }
+        catch (UserErrorException e) {
+            model.addAttribute("stockItem", stockItemService.get(id));
+            model.addAttribute("error", e.getMessage());
+            return "stockItem";
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
         return "redirect:/stockItems";
     }

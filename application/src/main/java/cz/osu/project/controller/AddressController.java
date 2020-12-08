@@ -65,7 +65,17 @@ public class AddressController {
 
     @GetMapping("/address/{id}/delete")
     public String deleteAddress(@PathVariable Long id, Model model) {
-        addressService.delete(id);
+        try {
+            addressService.delete(id);
+        }
+        catch (UserErrorException e) {
+            model.addAttribute("address", addressService.get(id));
+            model.addAttribute("error", e.getMessage());
+            return "address";
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
         return "redirect:/addresses";
     }

@@ -1,6 +1,7 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Contact;
+import cz.osu.project.database.entity.User;
 import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,17 @@ public class ContactController {
 
     @GetMapping("/contact/{id}/delete")
     public String deleteContact(@PathVariable Long id, Model model) {
-        contactService.delete(id);
+        try {
+            contactService.delete(id);
+        }
+        catch (UserErrorException e) {
+            model.addAttribute("contact", contactService.get(id));
+            model.addAttribute("error", e.getMessage());
+            return "contact";
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
         return "redirect:/contacts";
     }
