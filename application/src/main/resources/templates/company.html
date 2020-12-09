@@ -37,17 +37,45 @@
                     <label>Název <label style="color:gray;">*</label></label>
                     <input th:value="${company.getName()}" class="form-control" type="text" placeholder="Název..." id="name" name="name">
                 </div>
+                <br>
+                <hr>
+                <br>
+                <p class="my-header"><b>Kontakt</b></p>
                 <div class="form-group">
-                    <label>Adresa <label style="color:gray;">*</label></label>
-                    <select class="custom-select" id="address" name="address">
-                        <option th:selected="${company.getAddress().getId() == address.getId()}" th:value="${address.getId()}" th:text="${address.getStreetName() + ' ' + address.getBuildingNumber() + ' ' + address.getCity() + ' ' + address.getState()}" th:each="address: ${addresses}"></option>
-                    </select>
+                    <label>E-mail <label style="color:gray;">*</label></label>
+                    <input th:value="${company.getContact().getEmail()}" class="form-control" type="email" placeholder="e-mail" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label>Adresa <label style="color:gray;">*</label></label>
-                    <select class="custom-select" id="contact" name="contact">
-                        <option th:selected="${company.getContact().getId() == contact.getId()}" th:value="${contact.getId()}" th:text="${contact.getEmail() + ' ' + contact.getPhone() + ' ' + contact.getFax()}" th:each="contact: ${contacts}"></option>
-                    </select>
+                    <label>Telefonní číslo <label style="color:gray;">*</label></label>
+                    <input th:value="${company.getContact().getPhone()}" class="form-control" type="text" placeholder="Telefonní číslo..." id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Fax</label>
+                    <input th:value="${company.getContact().getFax()}" class="form-control" type="text" placeholder="Fax..." id="fax" name="fax">
+                </div>
+                <br>
+                <hr>
+                <br>
+                <p class="my-header"><b>Sídlo společnosti</b></p>
+                <div class="form-group">
+                    <label>Název ulice <label style="color:gray;">*</label></label>
+                    <input th:value="${company.getAddress().getStreetName()}" class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName" required>
+                </div>
+                <div class="form-group">
+                    <label>Číslo popisné <label style="color:gray;">*</label></label>
+                    <input th:value="${company.getAddress().getBuildingNumber()}" class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber" required>
+                </div>
+                <div class="form-group">
+                    <label>PSČ <label style="color:gray;">*</label></label>
+                    <input th:value="${company.getAddress().getPostalCode()}" class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode" required>
+                </div>
+                <div class="form-group">
+                    <label>Město <label style="color:gray;">*</label></label>
+                    <input th:value="${company.getAddress().getCity()}" class="form-control" type="text" placeholder="Město..." id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label>Stát <label style="color:gray;">*</label></label>
+                    <input th:value="${company.getAddress().getState()}" class="form-control" type="text" placeholder="Stát..." id="state" name="state" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Upravit</button>
                 <br>
@@ -83,17 +111,45 @@
                     <label>Název <label style="color:gray;">*</label></label>
                     <input th:value="${name}" class="form-control" type="text" placeholder="Název..." id="name" name="name" required>
                 </div>
+                <br>
+                <hr>
+                <br>
+                <p class="my-header"><b>Kontakt</b></p>
                 <div class="form-group">
-                    <label>Adresa <label style="color:gray;">*</label></label>
-                    <select class="custom-select" id="address" name="address">
-                        <option th:value="${address.getId()}" th:text="${address.getStreetName() + ' ' + address.getBuildingNumber() + ' ' + address.getCity() + ' ' + address.getState()}" th:each="address: ${addresses}"></option>
-                    </select>
+                    <label>E-mail <label style="color:gray;">*</label></label>
+                    <input th:value="${email}" class="form-control" type="email" placeholder="E-mail..." id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label>Adresa <label style="color:gray;">*</label></label>
-                    <select class="custom-select" id="contact" name="contact">
-                        <option th:value="${contact.getId()}" th:text="${contact.getEmail() + ' ' + contact.getPhone() + ' ' + contact.getFax()}" th:each="contact: ${contacts}"></option>
-                    </select>
+                    <label>Telefonní číslo <label style="color:gray;">*</label></label>
+                    <input th:value="${phone}" class="form-control" type="text" placeholder="Telefonní číslo..." id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Fax</label>
+                    <input th:value="${fax}" class="form-control" type="text" placeholder="Fax..." id="fax" name="fax">
+                </div>
+                <br>
+                <hr>
+                <br>
+                <p class="my-header"><b>Sídlo společnosti</b></p>
+                <div class="form-group">
+                    <label>Název ulice <label style="color:gray;">*</label></label>
+                    <input th:value="${streetName}" class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName" required>
+                </div>
+                <div class="form-group">
+                    <label>Číslo popisné <label style="color:gray;">*</label></label>
+                    <input th:value="${buildingNumber}" class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber" required>
+                </div>
+                <div class="form-group">
+                    <label>PSČ <label style="color:gray;">*</label></label>
+                    <input th:value="${postalCode}" class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode" required>
+                </div>
+                <div class="form-group">
+                    <label>Město <label style="color:gray;">*</label></label>
+                    <input th:value="${city}" class="form-control" type="text" placeholder="Město..." id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label>Stát <label style="color:gray;">*</label></label>
+                    <input th:value="${state}" class="form-control" type="text" placeholder="Stát..." id="state" name="state" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Odeslat</button>
                 <br>

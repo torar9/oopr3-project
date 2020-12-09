@@ -63,22 +63,27 @@ public class CompanyController {
     @PostMapping("/company/{id}")
     public String postCompany(@PathVariable Long id,
                               @RequestParam(name="name", required=true)String name,
-                              @RequestParam(name="address", required=true)Long addressID,
-                              @RequestParam(name="contact", required=true)Long contactID,
+                              @RequestParam(name="streetName", required=true)String streetName,
+                              @RequestParam(name="buildingNumber", required=true)String buildingNumber,
+                              @RequestParam(name="postalCode", required=true)String postalCode,
+                              @RequestParam(name="city", required=true)String city,
+                              @RequestParam(name="state", required=true)String state,
+                              @RequestParam(name="email", required=true)String email,
+                              @RequestParam(name="phone", required=true)String phone,
+                              @RequestParam(name="fax", required=false)String fax,
                               Model model) {
         Company company = companyService.get(id);
-        Address address = addressService.get(addressID);
-        Contact contact = contactService.get(contactID);
-
-        List<Address> addresses = addressService.getAll();
-        List<Contact> contacts = contactService.getAll();
-
-        model.addAttribute("addresses", addresses);
-        model.addAttribute("contacts", contacts);
-
-        company.set(name, address, contact);
         try {
-            companyService.save(company);
+            company.setName(name);
+            Address address = addressService.get(company.getAddress().getId());
+            address.set(streetName, buildingNumber, postalCode, city, state);
+            addressService.save(address);
+            System.out.println(email + " " + phone + " " + fax);
+            Contact contact = contactService.get(company.getContact().getId());
+            contact.set(email, phone, fax);
+            contactService.save(contact);
+
+            company = companyService.save(company);
             model.addAttribute("message", "Upraveno");
         }
         catch (UserErrorException e) {
@@ -88,7 +93,6 @@ public class CompanyController {
             System.err.println(e.getMessage());
         }
 
-        company = companyService.get(id);
         model.addAttribute("company", company);
         List<Expedition> expeditions = expeditionService.getCompanyExpeditions(company);
         model.addAttribute("expeditions", expeditions);
@@ -133,8 +137,14 @@ public class CompanyController {
 
     @PostMapping("/company/new")
     public String postNewCompany(@RequestParam(name="name", required=true)String name,
-                                 @RequestParam(name="address", required=true) Long addressID,
-                                 @RequestParam(name="contact", required=true) Long contactID,
+                                 @RequestParam(name="streetName", required=true)String streetName,
+                                 @RequestParam(name="buildingNumber", required=true)String buildingNumber,
+                                 @RequestParam(name="postalCode", required=true)String postalCode,
+                                 @RequestParam(name="city", required=true)String city,
+                                 @RequestParam(name="state", required=true)String state,
+                                 @RequestParam(name="email", required=true)String email,
+                                 @RequestParam(name="phone", required=true)String phone,
+                                 @RequestParam(name="fax", required=false)String fax,
                                  Model model) {
         List<Address> addresses = addressService.getAll();
         List<Contact> contacts = contactService.getAll();
@@ -143,7 +153,9 @@ public class CompanyController {
         model.addAttribute("contacts", contacts);
 
         try {
-            Company company = companyService.create(name, addressID, contactID);
+            Contact contact = contactService.create(email, phone, fax);
+            Address address = addressService.create(streetName, buildingNumber, postalCode, city, state);
+            Company company = companyService.create(name, address.getId(), contact.getId());
             return "redirect:/company/" + company.getId();
         }
         catch (UserErrorException e) {

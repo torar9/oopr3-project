@@ -31,10 +31,10 @@ public class CompanyService {
         return companyRepo.save(item);
     }
 
-    public void save(Company company) throws UserErrorException {
+    public Company save(Company company) throws UserErrorException {
         checkMandatoryFields(company);
 
-        companyRepo.save(company);
+        return companyRepo.save(company);
     }
 
     public Company get(Long id) {
