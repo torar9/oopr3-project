@@ -78,7 +78,6 @@ public class CompanyController {
             Address address = addressService.get(company.getAddress().getId());
             address.set(streetName, buildingNumber, postalCode, city, state);
             addressService.save(address);
-            System.out.println(email + " " + phone + " " + fax);
             Contact contact = contactService.get(company.getContact().getId());
             contact.set(email, phone, fax);
             contactService.save(contact);
