@@ -109,7 +109,24 @@ public class CompanyController {
 
     @GetMapping("/company/{id}/delete")
     public String deleteProduct(@PathVariable Long id, Model model) {
-        companyService.delete(id);
+        try {
+            companyService.delete(id);
+        }
+        catch (UserErrorException e) {
+            List<Address> addresses = addressService.getAll();
+            List<Contact> contacts = contactService.getAll();
+            List<Expedition> expeditions = expeditionService.getCompanyExpeditions(companyService.get(id));
+
+            model.addAttribute("expeditions", expeditions);
+            model.addAttribute("addresses", addresses);
+            model.addAttribute("contacts", contacts);
+            model.addAttribute("company", companyService.get(id));
+            model.addAttribute("error", e.getMessage());
+            return "company";
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
         return "redirect:/companies";
     }

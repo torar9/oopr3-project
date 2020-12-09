@@ -41,9 +41,13 @@ public class CompanyService {
         return companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(Long id) {
-        Company item = companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
-        companyRepo.delete(item);
+    public void delete(Long id) throws UserErrorException {
+        Company company = companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+
+        if(company.getExpeditions().size() > 0)
+            throw new UserErrorException("Nelze odstranit, se společností jsou spojené záznamy");
+
+        companyRepo.delete(company);
     }
 
     public List<Company> getAll() {
