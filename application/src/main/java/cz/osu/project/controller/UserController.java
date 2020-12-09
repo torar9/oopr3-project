@@ -85,7 +85,7 @@ public class UserController {
                 user.setFname(fname);
                 user.setLname(lname);
 
-                user = userService.save(user);
+                userService.save(user);
             }
             else if(choice.equals("2")) {
                 userService.changePassword(user, currentPassword, newPassword, passwordAgain);
