@@ -35,15 +35,15 @@
                 <input th:value="${product.getId()}" type="hidden" id="id" name="id">
                 <div class="form-group">
                     <label>Název <label style="color:gray;">*</label></label>
-                    <input th:value="${product.getName()}" class="form-control" type="text" placeholder="Název..." id="name" name="name" required>
+                    <input th:value="${product.getName()}" class="form-control" type="text" placeholder="Název..." id="name" name="name" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Popis <label style="color:gray;">*</label></label>
-                    <input th:value="${product.getDescription()}" class="form-control" type="text" placeholder="Popis..." id="desc" name="desc" required>
+                    <input th:value="${product.getDescription()}" class="form-control" type="text" placeholder="Popis..." id="desc" name="desc" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Výrobce <label style="color:gray;">*</label></label>
-                    <input th:value="${product.getManufacturer()}" class="form-control" type="text" placeholder="Výrobce..." id="manufacturer" name="manufacturer" required>
+                    <input th:value="${product.getManufacturer()}" class="form-control" type="text" placeholder="Výrobce..." id="manufacturer" name="manufacturer" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Upravit</button>
                 <br>
@@ -57,22 +57,21 @@
                 <label class="text-danger" th:text="${error}"></label>
                 <div class="form-group">
                     <label>Název <label style="color:gray;">*</label></label>
-                    <input th:value="${name}" class="form-control" type="text" placeholder="Název..." id="name" name="name" required>
+                    <input th:value="${name}" class="form-control" type="text" placeholder="Název..." id="name" name="name" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Popis <label style="color:gray;">*</label></label>
-                    <input th:value="${desc}" class="form-control" type="text" placeholder="Popis..." id="desc" name="desc" required>
+                    <input th:value="${desc}" class="form-control" type="text" placeholder="Popis..." id="desc" name="desc" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group"><sc></sc>
                     <label>Výrobce <label style="color:gray;">*</label></label>
-                    <input th:value="${manufacturer}" class="form-control" type="text" placeholder="Výrobce..." id="manufacturer" name="manufacturer" required>
+                    <input th:value="${manufacturer}" class="form-control" type="text" placeholder="Výrobce..." id="manufacturer" name="manufacturer" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Odeslat</button>
                 <br>
                 <label style="color:gray;" class="mt-5">* povinný údaj</label>
             </form>
         </div>
-
     </div>
 
 </div>

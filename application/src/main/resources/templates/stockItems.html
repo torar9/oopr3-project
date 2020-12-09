@@ -44,7 +44,7 @@
                     <th class="table-head" scope="col">ID expedice</th>
                     <th class="table-head" scope="col">Počet</th>
                     <th class="table-head" scope="col">Cena Kč</th>
-                    <th class="table-head" scope="col">Datum naskladnění</th>
+                    <th class="table-head" scope="col">Datum naskladnění <br> [dd-mm-yyyy hh:mm]</th>
                 </tr>
                 <tbody>
                 <tr class='clickable-row' th:attr="data-href='/stockItem/' + ${stockItem.getId()}"  th:each="stockItem: ${stockItems}">

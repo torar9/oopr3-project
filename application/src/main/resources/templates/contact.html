@@ -35,7 +35,7 @@
                 <input th:value="${contact.getId()}" type="hidden" id="id" name="id">
                 <div class="form-group">
                     <label>E-mail <label style="color:gray;">*</label></label>
-                    <input th:value="${contact.getEmail()}" class="form-control" type="email" placeholder="e-mail" id="email" name="email" required>
+                    <input th:value="${contact.getEmail()}" class="form-control" type="email" placeholder="e-mail" id="email" name="email" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Telefonní číslo <label style="color:gray;">*</label></label>
@@ -72,9 +72,7 @@
                 <label style="color:gray;" class="mt-5">* povinný údaj</label>
             </form>
         </div>
-
     </div>
-
 </div>
 <div th:insert="fragment/footer.html"> </div>
 </body>

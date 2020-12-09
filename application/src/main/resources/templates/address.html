@@ -35,23 +35,23 @@
                 <input th:value="${address.getId()}" type="hidden" id="id" name="id">
                 <div class="form-group">
                     <label>Název ulice <label style="color:gray;">*</label></label>
-                    <input th:value="${address.getStreetName()}" class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName" required>
+                    <input th:value="${address.getStreetName()}" class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Číslo popisné <label style="color:gray;">*</label></label>
-                    <input th:value="${address.getBuildingNumber()}" class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber" required>
+                    <input th:value="${address.getBuildingNumber()}" class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>PSČ <label style="color:gray;">*</label></label>
-                    <input th:value="${address.getPostalCode()}" class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode" required>
+                    <input th:value="${address.getPostalCode()}" class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Město <label style="color:gray;">*</label></label>
-                    <input th:value="${address.getCity()}" class="form-control" type="text" placeholder="Město..." id="city" name="city" required>
+                    <input th:value="${address.getCity()}" class="form-control" type="text" placeholder="Město..." id="city" name="city" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Stát <label style="color:gray;">*</label></label>
-                    <input th:value="${address.getState()}" class="form-control" type="text" placeholder="Stát..." id="state" name="state" required>
+                    <input th:value="${address.getState()}" class="form-control" type="text" placeholder="Stát..." id="state" name="state" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Upravit</button>
                 <br>
@@ -67,32 +67,30 @@
                 <input type="hidden" id="Id" name="id" value="1">
                 <div class="form-group">
                     <label>Název ulice <label style="color:gray;">*</label></label>
-                    <input th:value="${streetName}" class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName" required>
+                    <input th:value="${streetName}" class="form-control" type="text" placeholder="Název ulice..." id="streetName" name="streetName" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Číslo popisné <label style="color:gray;">*</label></label>
-                    <input th:value="${buildingNumber}" class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber" required>
+                    <input th:value="${buildingNumber}" class="form-control" type="text" placeholder="Číslo popisné..." id="buildingNumber" name="buildingNumber" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>PSČ <label style="color:gray;">*</label></label>
-                    <input th:value="${postalCode}" class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode" required>
+                    <input th:value="${postalCode}" class="form-control" type="text" placeholder="PSČ..." id="postalCode" name="postalCode" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Město <label style="color:gray;">*</label></label>
-                    <input th:value="${city}" class="form-control" type="text" placeholder="Město..." id="city" name="city" required>
+                    <input th:value="${city}" class="form-control" type="text" placeholder="Město..." id="city" name="city" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label>Stát <label style="color:gray;">*</label></label>
-                    <input th:value="${state}" class="form-control" type="text" placeholder="Stát..." id="state" name="state" required>
+                    <input th:value="${state}" class="form-control" type="text" placeholder="Stát..." id="state" name="state" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-dark">Odeslat</button>
                 <br>
                 <label style="color:gray;" class="mt-5">* povinný údaj</label>
             </form>
         </div>
-
     </div>
-
 </div>
 <div th:insert="fragment/footer.html"> </div>
 </body>
