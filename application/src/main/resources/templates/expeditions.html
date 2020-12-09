@@ -45,8 +45,8 @@
                 <tr class="text-center">
                     <th class="table-head" scope="col">ID</th>
                     <th class="table-head" scope="col">Odběratel</th>
-                    <th class="table-head" scope="col">status</th>
-                    <th class="table-head" scope="col">Datum vytvoření</th>
+                    <th class="table-head" scope="col">Status</th>
+                    <th class="table-head" scope="col">Datum vytvoření <br> [dd-mm-yyyy hh:mm]</th>
                 </tr>
                 <tbody>
                 <tr class='clickable-row' th:attr="data-href='/expedition/' + ${expedition?.getId()}"  th:each="expedition: ${expeditions}">
