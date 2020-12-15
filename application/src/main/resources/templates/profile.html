@@ -33,11 +33,11 @@
                 </div>
                 <div class="form-group">
                     <label th:value="fname" for="fname" class="text-dark">Jméno:</label><br>
-                    <input th:value="${user.getFname()}" type="text" name="fname" id="fname" class="form-control" required>
+                    <input th:value="${user.getFname()}" type="text" name="fname" id="fname" class="form-control" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <label th:value="lname" for="lname" class="text-dark">Příjmení:</label><br>
-                    <input th:value="${user.getLname()}" type="text" name="lname" id="lname" class="form-control" required>
+                    <input th:value="${user.getLname()}" type="text" name="lname" id="lname" class="form-control" pattern="^[^\s]+(\s+[^\s]+)*$" title="Před a za textem nesmí být mezery" required>
                 </div>
                 <div class="form-group">
                     <input type="submit" name="submit" class="btn btn-primary btn-dark" value="Upravit">

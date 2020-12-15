@@ -56,9 +56,9 @@ public class UserService {
     private void checkMandatoryFields(String email, String lname, String fname, String password) throws UserErrorException {
         if(email == null || email.isEmpty())
             throw new UserErrorException("Email musí být vyplněn");
-        if(lname == null || lname.isEmpty())
-            throw new UserErrorException("Jméno musí být vyplněno");
         if(fname == null || fname.isEmpty())
+            throw new UserErrorException("Jméno musí být vyplněno");
+        if(lname == null || lname.isEmpty())
             throw new UserErrorException("Příjmení musí být vyplněno");
         if(password == null || password.isEmpty())
             throw new UserErrorException("Heslo musí být vyplněno");
