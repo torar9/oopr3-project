@@ -4,6 +4,7 @@ import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.database.entity.StockItem;
 import cz.osu.project.database.repository.ExpeditionRepository;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ExpeditionService {
     @Autowired
     StockItemService stockItemService;
 
-    public Expedition create(String status, Long companyID) throws UserErrorException {
+    public Expedition create(String status, Long companyID) throws UserErrorException, NotFoundException {
         checkMandatoryFields(status, companyID);
 
         Company company = companyService.get(companyID);
@@ -36,8 +37,8 @@ public class ExpeditionService {
         expoRepo.save(expedition);
     }
 
-    public Expedition get(Long id) {
-        return expoRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
+    public Expedition get(Long id) throws NotFoundException {
+        return expoRepo.findById(id).orElseThrow(() -> new NotFoundException("Expedice nenalezena"));
     }
 
     public void delete(Long id) {

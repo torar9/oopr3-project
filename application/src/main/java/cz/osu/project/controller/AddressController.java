@@ -1,6 +1,7 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Address;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class AddressController {
                               @RequestParam(name="state", required=true)String state,
                               Model model) {
         Address address= addressService.get(id);
-        address.set(streetName, buildingNumber, postalCode, city, state);
+        address.set(streetName.trim(), buildingNumber.trim(), postalCode.trim(), city.trim(), state.trim());
         try {
             addressService.save(address);
             model.addAttribute("message", "Upraveno");
@@ -92,11 +93,11 @@ public class AddressController {
             return "redirect:/address/" + address.getId();
         }
         catch (UserErrorException e) {
-            model.addAttribute("streetName", streetName);
-            model.addAttribute("buildingNumber", buildingNumber);
-            model.addAttribute("postalCode", postalCode);
-            model.addAttribute("city", city);
-            model.addAttribute("state", state);
+            model.addAttribute("streetName", streetName.trim());
+            model.addAttribute("buildingNumber", buildingNumber.trim());
+            model.addAttribute("postalCode", postalCode.trim());
+            model.addAttribute("city", city.trim());
+            model.addAttribute("state", state.trim());
             model.addAttribute("error", e.getMessage());
         }
         catch (Exception e) {
@@ -104,5 +105,15 @@ public class AddressController {
         }
 
         return "address";
+    }
+
+    @ExceptionHandler(value = NotFoundException.class)
+    public String NotFoundException(NotFoundException e, Model model) {
+        return "error";
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public String basicException(NotFoundException e, Model model) {
+        return "error";
     }
 }

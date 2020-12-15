@@ -2,6 +2,7 @@ package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.repository.ProductRepository;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,12 +29,12 @@ public class ProductService {
         productRepo.save(product);
     }
 
-    public Product get(Long id) {
-        return productRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
+    public Product get(Long id) throws NotFoundException{
+        return productRepo.findById(id).orElseThrow(() -> new NotFoundException("Produkt nenalezen"));
     }
 
-    public void delete(Long id) throws UserErrorException {
-        Product product = productRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+    public void delete(Long id) throws UserErrorException, NotFoundException {
+        Product product = productRepo.findById(id).orElseThrow(() -> new NotFoundException("Produkt nenalezen"));
         if(product.getStockItems().size() > 0)
             throw new UserErrorException("Produkt je používán");
         productRepo.delete(product);

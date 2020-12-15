@@ -2,6 +2,7 @@ package cz.osu.project.service;
 
 import cz.osu.project.database.entity.*;
 import cz.osu.project.database.repository.StockItemRepository;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class StockItemService {
     @Autowired
     ExpeditionService expeditionService;
 
-    public StockItem create(Integer quantity, Double price, Double weight, Long productID, Long companyID, Long expeditionID) throws UserErrorException {
+    public StockItem create(Integer quantity, Double price, Double weight, Long productID, Long companyID, Long expeditionID) throws UserErrorException, NotFoundException {
         checkMandatoryFields(quantity, price, weight, productID, companyID);
 
         Product product = productService.get(productID);
@@ -39,12 +40,12 @@ public class StockItemService {
         stockItemRepo.save(stockItem);
     }
 
-    public StockItem get(Long id) {
-        return stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
+    public StockItem get(Long id) throws NotFoundException{
+        return stockItemRepo.findById(id).orElseThrow(() -> new NotFoundException("Zboží nenalezeno"));
     }
 
-    public void delete(Long id) throws UserErrorException {
-        StockItem item = stockItemRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+    public void delete(Long id) throws UserErrorException, NotFoundException {
+        StockItem item = stockItemRepo.findById(id).orElseThrow(() -> new NotFoundException("Zboží nenalezeno"));
         if(item.isBlocked())
             throw new UserErrorException("Položku nelze odstranit");
         stockItemRepo.delete(item);

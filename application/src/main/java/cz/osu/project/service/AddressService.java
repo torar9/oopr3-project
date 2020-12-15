@@ -2,6 +2,7 @@ package cz.osu.project.service;
 
 import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.repository.AddressRepository;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class AddressService {
         return addressRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(long id) throws UserErrorException {
-        Address address = addressRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+    public void delete(long id) throws UserErrorException, NotFoundException {
+        Address address = addressRepo.findById(id).orElseThrow(() -> new NotFoundException("Nelze odstranit"));
         if(address.getAddresses().size() > 0)
             throw new UserErrorException("Adresa je používána");
         addressRepo.delete(address);

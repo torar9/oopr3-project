@@ -3,6 +3,7 @@ package cz.osu.project.service;
 import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.entity.User;
 import cz.osu.project.database.repository.ContactRepository;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +34,8 @@ public class ContactService {
         return contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
     }
 
-    public void delete(Long id) throws UserErrorException {
-        Contact contact = contactRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+    public void delete(Long id) throws UserErrorException, NotFoundException {
+        Contact contact = contactRepo.findById(id).orElseThrow(() -> new NotFoundException("Kontakt nenalezen"));
 
         if(contact.getCompanies().size() > 0)
             throw new UserErrorException("Kontakt je používán");

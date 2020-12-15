@@ -2,6 +2,7 @@ package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Product;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,10 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
-    public String getProduct(@PathVariable Long id, Model model) {
+    public String getProduct(@PathVariable Long id, Model model) throws NotFoundException {
         Product product = productService.get(id);
         model.addAttribute("product", product);
+        model.addAttribute("isUsed", (product.getStockItems().size() > 0)? true : false);
 
         return "product";
     }
@@ -38,9 +40,9 @@ public class ProductController {
                               @RequestParam(name="name", required=true)String name,
                               @RequestParam(name="desc", required=true)String desc,
                               @RequestParam(name="manufacturer", required=true)String manufacturer,
-                              Model model) {
+                              Model model) throws NotFoundException{
         Product product = productService.get(id);
-        product.set(name, desc, manufacturer);
+        product.set(name.trim(), desc.trim(), manufacturer.trim());
         try {
             productService.save(product);
             model.addAttribute("message", "Upraveno");
@@ -54,6 +56,7 @@ public class ProductController {
 
         product = productService.get(id);
         model.addAttribute("product", product);
+        model.addAttribute("isUsed", (product.getStockItems().size() > 0)? true : false);
 
         return "product";
     }
@@ -64,7 +67,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}/delete")
-    public String deleteProduct(@PathVariable Long id, Model model) {
+    public String deleteProduct(@PathVariable Long id, Model model) throws NotFoundException{
         try {
             productService.delete(id);
         }
@@ -90,9 +93,9 @@ public class ProductController {
             return "redirect:/product/" + product.getId();
         }
         catch (UserErrorException e) {
-            model.addAttribute("name", name);
-            model.addAttribute("desc", desc);
-            model.addAttribute("manufacturer", manufacturer);
+            model.addAttribute("name", name.trim());
+            model.addAttribute("desc", desc.trim());
+            model.addAttribute("manufacturer", manufacturer.trim());
             model.addAttribute("error", e.getMessage());
         }
         catch (Exception e) {
@@ -100,5 +103,15 @@ public class ProductController {
         }
 
         return "product";
+    }
+
+    @ExceptionHandler(value = NotFoundException.class)
+    public String NotFoundException(NotFoundException e, Model model) {
+        return "error";
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public String basicException(NotFoundException e, Model model) {
+        return "error";
     }
 }

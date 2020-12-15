@@ -2,6 +2,7 @@ package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.entity.User;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class ContactController {
                               @RequestParam(name="fax", required=false)String fax,
                               Model model) {
         Contact contact = contactService.get(id);
-        contact.set(email, phone, fax);
+        contact.set(email.trim(), phone.trim(), fax);
         try {
             contactService.save(contact);
             model.addAttribute("message", "Upraveno");
@@ -89,9 +90,9 @@ public class ContactController {
             return "redirect:/contact/" + contact.getId();
         }
         catch (UserErrorException e) {
-            model.addAttribute("email", email);
-            model.addAttribute("phone", phone);
-            model.addAttribute("fax", email);
+            model.addAttribute("email", email.trim());
+            model.addAttribute("phone", phone.trim());
+            model.addAttribute("fax", fax);
             model.addAttribute("error", e.getMessage());
         }
         catch (Exception e) {
@@ -99,5 +100,15 @@ public class ContactController {
         }
 
         return "contact";
+    }
+
+    @ExceptionHandler(value = NotFoundException.class)
+    public String NotFoundException(NotFoundException e, Model model) {
+        return "error";
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public String basicException(NotFoundException e, Model model) {
+        return "error";
     }
 }

@@ -1,6 +1,7 @@
 package cz.osu.project.controller;
 
 import cz.osu.project.database.entity.User;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.SecurityServiceImpl;
 import cz.osu.project.service.UserService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,13 +84,13 @@ public class UserController {
 
         try {
             if(choice.equals("1")) {
-                user.setFname(fname);
-                user.setLname(lname);
+                user.setFname(fname.trim());
+                user.setLname(lname.trim());
 
                 userService.save(user);
             }
             else if(choice.equals("2")) {
-                userService.changePassword(user, currentPassword, newPassword, passwordAgain);
+                userService.changePassword(user, currentPassword, newPassword.trim(), passwordAgain.trim());
             }
         }
         catch(UserErrorException e) {
@@ -99,5 +101,15 @@ public class UserController {
         }
 
         return "profile";
+    }
+
+    @ExceptionHandler(value = NotFoundException.class)
+    public String NotFoundException(NotFoundException e, Model model) {
+        return "error";
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public String basicException(NotFoundException e, Model model) {
+        return "error";
     }
 }

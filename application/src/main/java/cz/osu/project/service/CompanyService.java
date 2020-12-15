@@ -4,6 +4,7 @@ import cz.osu.project.database.entity.Address;
 import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Contact;
 import cz.osu.project.database.repository.CompanyRepository;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +38,12 @@ public class CompanyService {
         return companyRepo.save(company);
     }
 
-    public Company get(Long id) {
-        return companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException());
+    public Company get(Long id) throws NotFoundException {
+        return companyRepo.findById(id).orElseThrow(() -> new NotFoundException("Společnost nenalezena"));
     }
 
-    public void delete(Long id) throws UserErrorException {
-        Company company = companyRepo.findById(id).orElseThrow(() -> new InvalidParameterException("Nelze odstranit"));
+    public void delete(Long id) throws UserErrorException, NotFoundException {
+        Company company = companyRepo.findById(id).orElseThrow(() -> new NotFoundException("Společnost nenalezena"));
 
         if(company.getExpeditions().size() > 0)
             throw new UserErrorException("Nelze odstranit, se společností jsou spojené záznamy");

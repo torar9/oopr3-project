@@ -4,6 +4,7 @@ import cz.osu.project.database.entity.Company;
 import cz.osu.project.database.entity.Expedition;
 import cz.osu.project.database.entity.Product;
 import cz.osu.project.database.entity.StockItem;
+import cz.osu.project.exception.NotFoundException;
 import cz.osu.project.exception.UserErrorException;
 import cz.osu.project.service.CompanyService;
 import cz.osu.project.service.ExpeditionService;
@@ -12,10 +13,7 @@ import cz.osu.project.service.StockItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class StockItemController {
     }
 
     @GetMapping("/stockItem/{id}")
-    public String getStockItem(@PathVariable long id, Model model) {
+    public String getStockItem(@PathVariable long id, Model model) throws NotFoundException{
         StockItem stockItem = stockItemService.get(id);
         model.addAttribute("stockItem", stockItem);
         List<Product> products = productService.getAll();
@@ -76,7 +74,7 @@ public class StockItemController {
                               @RequestParam(name="quantity", required=true)Integer quantity,
                               @RequestParam(name="price", required=true)Double price,
                               @RequestParam(name="weight", required=true)Double weight,
-                              Model model) {
+                              Model model) throws NotFoundException{
         StockItem stockItem = stockItemService.get(id);
         Company suplier = companyService.get(suplierID);
         Product product = productService.get(productID);
@@ -124,7 +122,7 @@ public class StockItemController {
     }
 
     @GetMapping("/stockItem/{id}/delete")
-    public String deleteStockItem(@PathVariable long id, Model model) {
+    public String deleteStockItem(@PathVariable long id, Model model) throws NotFoundException{
         try {
             stockItemService.delete(id);
         }
@@ -163,5 +161,15 @@ public class StockItemController {
         }
 
         return "stockItem";
+    }
+
+    @ExceptionHandler(value = NotFoundException.class)
+    public String NotFoundException(NotFoundException e, Model model) {
+        return "error";
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public String basicException(NotFoundException e, Model model) {
+        return "error";
     }
 }
